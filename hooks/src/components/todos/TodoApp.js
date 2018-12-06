@@ -13,8 +13,8 @@ import 'todomvc-app-css/index.css';
 
 const TodoApp = () => {
     const apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos';
-    const [todos, setTodos] = useState([]);
     const { location } = useReactRouter();
+    const [todos, setTodos] = useState([]);
     const [todosToShow, setTodosToShow] = useState([]);
     
     // initial load of todos data
