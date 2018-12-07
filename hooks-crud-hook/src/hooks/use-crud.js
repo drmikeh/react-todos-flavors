@@ -4,13 +4,16 @@ import toastr from '../toastr';
 
 function useCrud(apiUrl, initialValue) {
     const [data, setData] = useState(initialValue);
+    const [loading, setLoading] = useState(false);
 
     // initial load of data
     useEffect(() => {
         try {
             (async () => {
+                setLoading(true);
                 const response = await axios.get(apiUrl);
                 setData(response.data);
+                setLoading(false);
             })();
         } catch (error) {
             toastr.error(error);
@@ -71,11 +74,12 @@ function useCrud(apiUrl, initialValue) {
         return data.filter(fn);
     }
 
-    function reduce(fn) {
-        return data.reduce(fn, []);
+    function reduce(fn, initialValue) {
+        return data.reduce(fn, initialValue);
     }
 
     return {
+        loading,
         data,
         setData,
         create,

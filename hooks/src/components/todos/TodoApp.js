@@ -15,7 +15,8 @@ const TodoApp = () => {
     const apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos';
     const { location } = useReactRouter();
     const [todos, setTodos] = useState([]);
-    const [todosToShow, setTodosToShow] = useState([]);
+
+    console.log('TodoApp');
     
     // initial load of todos data
     useEffect(() => {
@@ -35,22 +36,6 @@ const TodoApp = () => {
      * If the list contains some variables, the effect executes whenever any of
      * those variables are reassigned.
      */
-    
-    // update `todosToShow` whenever changes to `todos` or `location` are detected.
-    useEffect(() => {
-        const viewState = location.pathname.slice(1);
-        const todosToShow = todos.filter(todo => {
-            switch (viewState) {
-                case ACTIVE_TODOS:
-                    return !todo.completed;
-                case COMPLETED_TODOS:
-                    return todo.completed;
-                default:
-                    return true;
-            }
-        });
-        setTodosToShow(todosToShow);
-    }, [todos, location]);
 
     async function addTodo(val) {
         try {
@@ -122,6 +107,17 @@ const TodoApp = () => {
     const completedCount = todos.reduce( (acc, todo) => todo.completed ? acc + 1 : acc, 0);
     const activeCount = todos.length - completedCount;
 
+    const viewState = location.pathname.slice(1);
+    const todosToShow = todos.filter(todo => {
+        switch (viewState) {
+            case ACTIVE_TODOS:
+                return !todo.completed;
+            case COMPLETED_TODOS:
+                return todo.completed;
+            default:
+                return true;
+        }
+    });
     return (
         <section>
             <article className="todoapp">
