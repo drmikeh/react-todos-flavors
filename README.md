@@ -9,3 +9,8 @@ Here are the planned flavors:
 * MobX
 * Redux
 * Redux with redux-actions
+
+What about:
+
+* Relay?
+* 

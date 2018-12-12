@@ -1,0 +1,34 @@
+.title {
+    width: 100%;
+    font-size: 100px;
+    font-weight: 100;
+    text-align: center;
+    color: rgba(175, 47, 47, 0.15);
+    text-rendering: optimizeLegibility;
+}
+
+.todoapp {
+    /* background: #fff; */
+    /* margin: 130px 0 40px 0; */
+    margin: 0;
+    /* position: relative; */
+    /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1); */
+}
+
+.cross-fade-leave {
+    opacity: 0.75;
+}
+.cross-fade-leave.cross-fade-leave-active {
+    opacity: 0.25;
+    transition: opacity 0.5s ease-in;
+}
+.cross-fade-enter {
+    opacity: 0.25;
+}
+.cross-fade-enter.cross-fade-enter-active {
+    opacity: 0.75;
+    transition: opacity 0.35s ease-in;
+}
+.cross-fade-height {
+    /* transition: height 0.25s ease-in-out; */
+}
