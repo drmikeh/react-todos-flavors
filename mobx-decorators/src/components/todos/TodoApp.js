@@ -8,6 +8,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import 'todomvc-common/base.css';
 import 'todomvc-app-css/index.css';
 
+@observer
 class TodoApp extends Component {
     componentDidMount() {
         this.props.todoState.fetchTodos();
@@ -61,4 +62,4 @@ class TodoApp extends Component {
  * To ensure that routing continues to work correctly, we need to wrap the MobX observer with a `withRouter` HOC.
  * See https: //github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md#the-solution
  */
-export default withRouter(observer(TodoApp));
+export default withRouter(TodoApp);

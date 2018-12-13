@@ -1,16 +1,19 @@
 import React from 'react';
 import classNames from 'classnames';
-import { decorate, observable } from 'mobx';
+import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
 const ESCAPE_KEY = 27;
 const ENTER_KEY = 13;
 
+@observer
 class Todo extends React.Component {
+    @observable editText = null;
+    @observable editing = false;
+
     constructor(props) {
         super(props);
         this.editText = this.props.todo.text;
-        this.editing = false;
         this.editInputRef = React.createRef();
     }
 
@@ -79,9 +82,4 @@ class Todo extends React.Component {
     }
 }
 
-decorate(Todo, {
-    editText: observable,
-    editing: observable
-});
-
-export default observer(Todo);
+export default Todo;
