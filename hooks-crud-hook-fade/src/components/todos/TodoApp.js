@@ -93,8 +93,6 @@ const TodoApp = () => {
         </article>
     );
 
-    const content2 = todos.loading ? spinner : <h1 key={2}>Done</h1>;
-
     return (
         <section>
             <h1 className="title">todos</h1>
