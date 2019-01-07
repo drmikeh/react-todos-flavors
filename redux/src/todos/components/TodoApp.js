@@ -60,7 +60,7 @@ class TodoApp extends Component {
 
                     <main className="main">
                         <Route path="/:filter?" render={props => {
-                            const filter = props.match.params.filter || 'all';
+                            const filter = props.match.params.filter || ALL_TODOS;
                             const todosToShow = this.getTodosToShow(filter);
                             return (
                                 <TodoList
@@ -68,7 +68,7 @@ class TodoApp extends Component {
                                     todos={todosToShow}
                                     toggle={this.onToggleCompleted.bind(this)}
                                     remove={this.props.onDelete}
-                                    save={this.updateText.bind(this)}
+                                    save={this.onUpdateText.bind(this)}
                                 />
                             );
                         }}/>
@@ -98,6 +98,7 @@ const mapStateToProps = state => {
 
 // here we define callbacks so that the component implementation (the code above)
 //  does not depend on dispatch (or any of the Redux api)
+/*
 const mapDispatchToProps = (dispatch, containerProps) => {
   return {
     onAdd: text => {
@@ -114,10 +115,21 @@ const mapDispatchToProps = (dispatch, containerProps) => {
     }
   };
 };
+*/
 
+/* Below we use a short-hand notation for the mapDispatchToProps config.
+ * The rule here is that if the prop callback and the function being passed to `dispatch` take the exact same args, we
+ * can simply pass a "mapping" object for the mapDispatchToProps config.
+ */ 
 export default withRouter(
     connect(
         mapStateToProps,
-        mapDispatchToProps
+        // mapDispatchToProps
+        {
+            onAdd: addTodo,
+            onSave: saveTodo,
+            onDelete: deleteTodo,
+            onDeleteCompleted: deleteCompleted
+        }
     )(TodoApp)
 );

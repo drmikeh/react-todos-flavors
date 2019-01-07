@@ -141,7 +141,7 @@ class TodoApp extends Component {
 
                     <main className="main">
                         <Route path="/:filter?" render={props => {
-                            const filter = props.match.params.filter || 'all';
+                            const filter = props.match.params.filter || ALL_TODOS;
                             const todosToShow = this.getTodosToShow(filter);
                             return (
                                 <TodoList

@@ -71,7 +71,7 @@ const TodoApp = () => {
 
                 <main className="main">
                     <Route path="/:filter?" render={props => {
-                        const filter = props.match.params.filter || 'all';
+                        const filter = props.match.params.filter || ALL_TODOS;
                         const todosToShow = getTodosToShow(filter);
                         return (todos.loading ? <h3>Loading...</h3> :
                             <TodoList
