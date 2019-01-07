@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
-import useReactRouter from '../../hooks/use-react-router';
 import toastr from '../../toastr';
 import NewTodoForm from './NewTodoForm';
 import TodoList from './TodoList';
 import TodoFooter from './TodoFooter';
-import { ACTIVE_TODOS, COMPLETED_TODOS } from './TodoViewStates';
+import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from './TodoViewStates';
 import 'font-awesome/css/font-awesome.min.css';
 import 'todomvc-common/base.css';
 import 'todomvc-app-css/index.css';
 
 const TodoApp = () => {
     const apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos';
-    const { location } = useReactRouter();
     const [todos, setTodos] = useState([]);
 
     console.log('TodoApp');
@@ -37,7 +35,22 @@ const TodoApp = () => {
      * those variables are reassigned.
      */
 
-    async function addTodo(val) {
+    function getTodosToShow(viewState) {
+        return todos.filter(todo => {
+            switch (viewState) {
+                case ALL_TODOS:
+                    return true;
+                case ACTIVE_TODOS:
+                    return !todo.completed;
+                case COMPLETED_TODOS:
+                    return todo.completed;
+                default:
+                    return false;
+            }
+        });
+    }
+
+    async function onAdd(val) {
         try {
             const todo = {
                 text: val,
@@ -50,7 +63,7 @@ const TodoApp = () => {
         };
     }
 
-    async function removeTodo(id) {
+    async function onDelete(id) {
         try {
             // Filter all todos except the one to be removed
             const remaining = todos.filter(todo => todo.id !== id);
@@ -73,7 +86,7 @@ const TodoApp = () => {
         };
     }
 
-    function updateText(id, text) {
+    function onUpdateText(id, text) {
         const foundTodo = todos.find(todo => todo.id === id);
         const updatedTodo = {
             ...foundTodo,
@@ -82,7 +95,7 @@ const TodoApp = () => {
         saveTodo(updatedTodo);
     }
 
-    function toggleCompleted(id) {
+    function onToggleCompleted(id) {
         const foundTodo = todos.find(todo => todo.id === id);
         const updatedTodo = {
             ...foundTodo,
@@ -91,7 +104,7 @@ const TodoApp = () => {
         saveTodo(updatedTodo);
     }
 
-    function clearCompleted() {
+    function onDeleteCompleted() {
         const keepers = todos.filter(todo => !todo.completed);
         const losers = todos.filter(todo => todo.completed);
         const promises = losers.map( todo => axios.delete(apiUrl + '/' + todo.id) );
@@ -107,34 +120,25 @@ const TodoApp = () => {
     const completedCount = todos.reduce( (acc, todo) => todo.completed ? acc + 1 : acc, 0);
     const activeCount = todos.length - completedCount;
 
-    const viewState = location.pathname.slice(1);
-    const todosToShow = todos.filter(todo => {
-        switch (viewState) {
-            case ACTIVE_TODOS:
-                return !todo.completed;
-            case COMPLETED_TODOS:
-                return todo.completed;
-            default:
-                return true;
-        }
-    });
     return (
         <section>
             <article className="todoapp">
                 <header className="header">
                     <h1 style={{ top: "-175px" }}>todos</h1>
-                    <NewTodoForm addTodo={addTodo} />
+                    <NewTodoForm addTodo={onAdd} />
                 </header>
 
                 <main className="main">
-                    <Route render={props => {
+                        <Route path="/:filter?" render={props => {
+                            const filter = props.match.params.filter || 'all';
+                            const todosToShow = getTodosToShow(filter);
                         return (
                             <TodoList
                                 {...props}
                                 todos={todosToShow}
-                                toggle={toggleCompleted}
-                                remove={removeTodo}
-                                save={updateText}
+                                toggle={onToggleCompleted}
+                                remove={onDelete}
+                                save={onUpdateText}
                             />
                         );
                     }}/>
@@ -142,7 +146,7 @@ const TodoApp = () => {
                 <TodoFooter
                     activeCount={activeCount}
                     completedCount={completedCount}
-                    onClearCompleted={clearCompleted}
+                    onClearCompleted={onDeleteCompleted}
                 />
             </article>
 

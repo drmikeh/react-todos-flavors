@@ -1,23 +1,21 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import useReactRouter from '../../hooks/use-react-router';
 import useCrud from '../../hooks/use-crud';
 import NewTodoForm from './NewTodoForm';
 import TodoList from './TodoList';
 import TodoFooter from './TodoFooter';
-import { ACTIVE_TODOS, COMPLETED_TODOS } from './TodoViewStates';
+import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from './TodoViewStates';
 import 'font-awesome/css/font-awesome.min.css';
 import 'todomvc-common/base.css';
 import 'todomvc-app-css/index.css';
 
 const TodoApp = () => {
     const apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos';
-    const { location } = useReactRouter();
     const todos = useCrud(apiUrl, []);
 
     console.log('TodoApp');
 
-    function updateText(id, text) {
+    function onUpdateText(id, text) {
         const foundTodo = todos.find(id);
         const updatedTodo = {
             ...foundTodo,
@@ -26,7 +24,7 @@ const TodoApp = () => {
         todos.update(updatedTodo);
     }
 
-    function toggleCompleted(id) {
+    function onToggleCompleted(id) {
         const foundTodo = todos.find(id);
         const updatedTodo = {
             ...foundTodo,
@@ -35,7 +33,7 @@ const TodoApp = () => {
         todos.update(updatedTodo);
     }
 
-    function clearCompleted() {
+    function onDeleteCompleted() {
         const keepers = todos.filter(todo => !todo.completed);
         const losers = todos.filter(todo => todo.completed);
         const promises = losers.map( todo => todos.destroy(todo.id) );
@@ -44,21 +42,24 @@ const TodoApp = () => {
             todos.setData(keepers)
         });
     }
+    
+    function getTodosToShow(viewState) {
+        return todos.filter(todo => {
+            switch (viewState) {
+                case ALL_TODOS:
+                    return true;
+                case ACTIVE_TODOS:
+                    return !todo.completed;
+                case COMPLETED_TODOS:
+                    return todo.completed;
+                default:
+                    return false;
+            }
+        });
+    }
 
     const completedCount = todos.reduce( (acc, todo) => todo.completed ? acc + 1 : acc, 0);
     const activeCount = todos.length() - completedCount;
-
-    const viewState = location.pathname.slice(1);
-    const todosToShow = todos.filter(todo => {
-        switch (viewState) {
-            case ACTIVE_TODOS:
-                return !todo.completed;
-            case COMPLETED_TODOS:
-                return todo.completed;
-            default:
-                return true;
-        }
-    });
 
     return (
         <section>
@@ -69,14 +70,16 @@ const TodoApp = () => {
                 </header>
 
                 <main className="main">
-                    <Route render={props => {
+                    <Route path="/:filter?" render={props => {
+                        const filter = props.match.params.filter || 'all';
+                        const todosToShow = getTodosToShow(filter);
                         return (todos.loading ? <h3>Loading...</h3> :
                             <TodoList
                                 {...props}
                                 todos={todosToShow}
-                                toggle={toggleCompleted}
+                                toggle={onToggleCompleted}
                                 remove={todos.destroy}
-                                save={updateText}
+                                save={onUpdateText}
                             />
                         );
                     }}/>
@@ -84,7 +87,7 @@ const TodoApp = () => {
                 <TodoFooter
                     activeCount={activeCount}
                     completedCount={completedCount}
-                    onClearCompleted={clearCompleted}
+                    onClearCompleted={onDeleteCompleted}
                 />
             </article>
 

@@ -27,7 +27,7 @@ class TodoApp extends Component {
         });
     }
 
-    updateText(id, text) {
+    onUpdateText(id, text) {
         const foundTodo = this.props.todos.find(todo => todo.id === id);
         const updatedTodo = {
             ...foundTodo,
@@ -36,7 +36,7 @@ class TodoApp extends Component {
         this.props.onSave(updatedTodo);
     }
 
-    toggleCompleted(id) {
+    onToggleCompleted(id) {
         const foundTodo = this.props.todos.find(todo => todo.id === id);
         const updatedTodo = {
             ...foundTodo,
@@ -66,7 +66,7 @@ class TodoApp extends Component {
                                 <TodoList
                                     {...props}
                                     todos={todosToShow}
-                                    toggle={this.toggleCompleted.bind(this)}
+                                    toggle={this.onToggleCompleted.bind(this)}
                                     remove={this.props.onDelete}
                                     save={this.updateText.bind(this)}
                                 />

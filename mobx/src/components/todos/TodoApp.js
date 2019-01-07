@@ -26,9 +26,9 @@ class TodoApp extends Component {
                     </header>
 
                     <main className="main">
-                        <Route render={props => {
-                            const viewState = props.location.pathname.slice(1);
-                            const todosToShow = this.props.todoState.filter(viewState);
+                        <Route path="/:filter?" render={props => {
+                            const filter = props.match.params.filter || 'all';
+                            const todosToShow = this.props.todoState.filter(filter);
                             return (
                                 <TodoList
                                     {...props}

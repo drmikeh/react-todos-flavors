@@ -5,7 +5,7 @@ import toastr from '../../toastr';
 import NewTodoForm from './NewTodoForm';
 import TodoList from './TodoList';
 import TodoFooter from './TodoFooter';
-import { ACTIVE_TODOS, COMPLETED_TODOS } from './TodoViewStates';
+import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from './TodoViewStates';
 import 'font-awesome/css/font-awesome.min.css';
 import 'todomvc-common/base.css';
 import 'todomvc-app-css/index.css';
@@ -33,17 +33,19 @@ class TodoApp extends Component {
     getTodosToShow(viewState) {
         return this.state.todos.filter(todo => {
             switch (viewState) {
+                case ALL_TODOS:
+                    return true;
                 case ACTIVE_TODOS:
                     return !todo.completed;
                 case COMPLETED_TODOS:
                     return todo.completed;
                 default:
-                    return true;
+                    return false;
             }
         });
     }
 
-    async addTodo(val) {
+    async onAdd(val) {
         try {
             const todo = {
                 text: val,
@@ -59,9 +61,9 @@ class TodoApp extends Component {
         };
     }
 
-    async removeTodo(id) {
+    async onDelete(id) {
         try {
-            // Filter all todos except the one to be removed
+            // Filter all todos except the one to be deleted
             const remaining = this.state.todos.filter(todo => todo.id !== id);
             await axios.delete(this.apiUrl + '/' + id);
             this.setState({
@@ -91,7 +93,7 @@ class TodoApp extends Component {
         };
     }
 
-    updateText(id, text) {
+    onUpdateText(id, text) {
         const foundTodo = this.state.todos.find(todo => todo.id === id);
         const updatedTodo = {
             ...foundTodo,
@@ -100,7 +102,7 @@ class TodoApp extends Component {
         this._saveTodo(updatedTodo);
     }
 
-    toggleCompleted(id) {
+    onToggleCompleted(id) {
         const foundTodo = this.state.todos.find(todo => todo.id === id);
         const updatedTodo = {
             ...foundTodo,
@@ -109,8 +111,8 @@ class TodoApp extends Component {
         this._saveTodo(updatedTodo);
     }
 
-    clearCompleted() {
-        // Filter all todos except the ones to be removed
+    onDeleteCompleted() {
+        // Filter all todos except the ones to be deleted
         const keepers = this.state.todos.filter(todo => !todo.completed);
         const losers = this.state.todos.filter(todo => todo.completed);
         const promises = losers.map( todo => axios.delete(this.apiUrl + '/' + todo.id) );
@@ -134,20 +136,20 @@ class TodoApp extends Component {
                 <article className="todoapp">
                     <header className="header">
                         <h1 style={{ top: "-175px" }}>todos</h1>
-                        <NewTodoForm addTodo={this.addTodo.bind(this)} />
+                        <NewTodoForm addTodo={this.onAdd.bind(this)} />
                     </header>
 
                     <main className="main">
-                        <Route render={props => {
-                            const viewState = props.location.pathname.slice(1);
-                            const todosToShow = this.getTodosToShow(viewState);
+                        <Route path="/:filter?" render={props => {
+                            const filter = props.match.params.filter || 'all';
+                            const todosToShow = this.getTodosToShow(filter);
                             return (
                                 <TodoList
                                     {...props}
                                     todos={todosToShow}
-                                    toggle={this.toggleCompleted.bind(this)}
-                                    remove={this.removeTodo.bind(this)}
-                                    save={this.updateText.bind(this)}
+                                    toggle={this.onToggleCompleted.bind(this)}
+                                    remove={this.onDelete.bind(this)}
+                                    save={this.onUpdateText.bind(this)}
                                 />
                             );
                         }}/>
@@ -155,7 +157,7 @@ class TodoApp extends Component {
                     <TodoFooter
                         activeCount={activeCount}
                         completedCount={completedCount}
-                        onClearCompleted={this.clearCompleted.bind(this)}
+                        onClearCompleted={this.onDeleteCompleted.bind(this)}
                     />
                 </article>
 
