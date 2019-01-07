@@ -1,5 +1,5 @@
 {
-  "name": "vanilla",
+  "name": "mobx-decorators",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
