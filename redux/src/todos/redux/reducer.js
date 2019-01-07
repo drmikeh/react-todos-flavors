@@ -6,6 +6,12 @@ import {
     DELETE_COMPLETED
 } from './types';
 
+import {
+    ALL_TODOS,
+    ACTIVE_TODOS,
+    COMPLETED_TODOS
+} from './filters';
+
 export default function todosReducer(state = [], action) {
     switch (action.type) {
         case FETCH_TODOS:
@@ -23,4 +29,19 @@ export default function todosReducer(state = [], action) {
         default:
             return state;
     }
+}
+
+export const getTodosToShow = (todos, filter) => {
+    return todos.filter(todo => {
+        switch (filter) {
+            case ALL_TODOS:
+                return true;
+            case ACTIVE_TODOS:
+                return !todo.completed;
+            case COMPLETED_TODOS:
+                return todo.completed;
+            default:
+                return false;
+        }
+    });
 }

@@ -5,28 +5,15 @@ import { withRouter } from 'react-router';
 import NewTodoForm from './NewTodoForm';
 import TodoList from './TodoList';
 import TodoFooter from './TodoFooter';
-import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from './TodoViewStates';
+import { ALL_TODOS } from '../redux/filters';
+
+import { getTodosToShow } from '../redux/reducer';
 import { addTodo, saveTodo, deleteTodo, deleteCompleted } from '../redux/actions';
 import 'font-awesome/css/font-awesome.min.css';
 import 'todomvc-common/base.css';
 import 'todomvc-app-css/index.css';
 
 class TodoApp extends Component {
-    getTodosToShow(viewState) {
-        return this.props.todos.filter(todo => {
-            switch (viewState) {
-                case ALL_TODOS:
-                    return true;
-                case ACTIVE_TODOS:
-                    return !todo.completed;
-                case COMPLETED_TODOS:
-                    return todo.completed;
-                default:
-                    return false;
-            }
-        });
-    }
-
     onUpdateText(id, text) {
         const foundTodo = this.props.todos.find(todo => todo.id === id);
         const updatedTodo = {
@@ -61,7 +48,7 @@ class TodoApp extends Component {
                     <main className="main">
                         <Route path="/:filter?" render={props => {
                             const filter = props.match.params.filter || ALL_TODOS;
-                            const todosToShow = this.getTodosToShow(filter);
+                            const todosToShow = getTodosToShow(todos, filter);
                             return (
                                 <TodoList
                                     {...props}
