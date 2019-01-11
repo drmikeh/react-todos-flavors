@@ -1,23 +1,24 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import toastr from '../toastr';
+import 'toastr/build/toastr.min.css';
 
 function useCrud(apiUrl, initialValue) {
-    const [data, setData] = useState(initialValue);
+    const [items, setItems] = useState(initialValue);
     const [loading, setLoading] = useState(false);
 
-    // initial load of data
+    // initial load of items
     useEffect(() => {
-        try {
-            (async () => {
+        (async () => {
+            try {
                 setLoading(true);
                 const response = await axios.get(apiUrl);
-                setData(response.data);
+                setItems(response.data);
                 setLoading(false);
-            })();
-        } catch (error) {
-            toastr.error(error);
-        }
+            } catch (error) {
+                toastr.error(error);
+            }
+        })();
     }, []);
     /* The 2nd arg above is a watch list of variables that trigger the effect.
      * If the list is empty, the effect only executes once (cDM).
@@ -27,14 +28,10 @@ function useCrud(apiUrl, initialValue) {
      * those variables are reassigned.
      */
 
-    async function create(val) {
+    async function create(item) {
         try {
-            const todo = {
-                text: val,
-                completed: false
-            };
-            const response = await axios.post(apiUrl, todo);
-            setData([...data, response.data]);
+            const response = await axios.post(apiUrl, item);
+            setItems([...items, response.data]);
         } catch (error) {
             toastr.error(error);
         };
@@ -42,48 +39,64 @@ function useCrud(apiUrl, initialValue) {
 
     async function destroy(id) {
         try {
-            // Filter all data except the one to be removed
-            const remaining = data.filter(todo => todo.id !== id);
+            // Filter all items except the one to be removed
+            const remaining = items.filter(item => item.id !== id);
             await axios.delete(apiUrl + '/' + id);
-            setData(remaining);
+            setItems(remaining);
         } catch (error) {
             toastr.error(error);
         };
     }
 
-    async function update(updatedTodo) {
+    async function destroyMany(filter) {
+        const keepers = items.filter(item => !filter(item));
+        const losers = items.filter(item => filter(item));
+        const promises = losers.map(item => axios.delete(apiUrl + '/' + item.id));
+        Promise.all(promises)
+            .then(responses => {
+                setItems(keepers)
+            })
+            .catch(error => {
+                console.log('HERE');
+                toastr.error(error);
+            });
+
+    }
+
+    async function update(updatedItem) {
         try {
-            const response = await axios.put(apiUrl + '/' + updatedTodo.id, updatedTodo)
-            const updatedTodoFromServer = response.data;
-            const newTodos = data.map(todo => todo.id !== updatedTodoFromServer.id ? todo : updatedTodoFromServer);
-            setData(newTodos);
+            const response = await axios.put(apiUrl + '/' + updatedItem.id, updatedItem)
+            const updatedItemFromServer = response.data;
+            const newItems = items.map(item => item.id !== updatedItemFromServer.id ? item : updatedItemFromServer);
+            setItems(newItems);
         } catch (error) {
             toastr.error(error);
         };
     }
 
     function length() {
-        return data ? data.length : 0;
+        return items ? items.length : 0;
     }
 
     function find(id) {
-        return data.find(todo => todo.id === id);
+        return items.find(item => item.id === id);
     }
 
     function filter(fn) {
-        return data.filter(fn);
+        return items.filter(fn);
     }
 
     function reduce(fn, initialValue) {
-        return data.reduce(fn, initialValue);
+        return items.reduce(fn, initialValue);
     }
 
     return {
         loading,
-        data,
-        setData,
+        items,
+        setItems,
         create,
         destroy,
+        destroyMany,
         update,
         length,
         find,

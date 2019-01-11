@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 import toastr from '../../toastr';
+import 'toastr/build/toastr.min.css';
 import NewTodoForm from './NewTodoForm';
 import TodoList from './TodoList';
 import TodoFooter from './TodoFooter';
@@ -18,14 +19,14 @@ const TodoApp = () => {
     
     // initial load of todos data
     useEffect(() => {
-        try {
-            (async () => {
+        (async () => {
+            try {
                 const response = await axios.get(apiUrl);
                 setTodos(response.data);
-            })();
-        } catch(error) {
-            toastr.error(error);
-        }
+            } catch(error) {
+                toastr.error(error);
+            }
+        })();
     }, []);
     /* The 2nd arg above is a watch list of variables that trigger the effect.
      * If the list is empty, the effect only executes once (cDM).
@@ -69,8 +70,7 @@ const TodoApp = () => {
             const remaining = todos.filter(todo => todo.id !== id);
             await axios.delete(apiUrl + '/' + id);
             setTodos(remaining);
-        }
-        catch(error) {
+        } catch(error) {
             toastr.error(error);
         };
     }

@@ -1,6 +1,7 @@
 import { action, observable } from 'mobx';
 import axios from 'axios';
 import toastr from '../toastr';
+import 'toastr/build/toastr.min.css';
 import { ACTIVE_TODOS, COMPLETED_TODOS } from './TodoViewStates';
 
 const apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos'
@@ -10,14 +11,14 @@ const todoState = observable({
 });
 
 todoState.fetchTodos = action(function fetchTodos() {
-    try {
-        (async () => {
+    (async () => {
+        try {
             const response = await axios.get(apiUrl);
             todoState.setTodos(response.data);
-        })();
-    } catch (error) {
-        toastr.error(error);
-    }
+        } catch (error) {
+            toastr.error(error);
+        }
+    })();
 });
 
 todoState.filter = function (viewState) {

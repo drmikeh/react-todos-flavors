@@ -7,34 +7,33 @@ import {
 } from './types';
 import axios from 'axios';
 import toastr from '../../toastr';
+import 'toastr/build/toastr.min.css';
 
 const apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos';
 
-export const fetchTodosSuccess = todos => {
-    return {
-        type: FETCH_TODOS,
-        todos
-    }
-};
-export const fetchTodos = () => {
-    return async dispatch => {
+export const fetchTodosSuccess = todos => ({
+    type: FETCH_TODOS,
+    todos
+});
+export const fetchTodos = () => (
+    async dispatch => {
         try {
             const response = await axios.get(apiUrl);
             dispatch(fetchTodosSuccess(response.data));
+            return response; // allows calling code to know when the data is available (i.e. perhaps for an animation effect)
         } catch (error) {
             toastr.error(error);
         }
     }
-};
+);
 
-export const addTodoSuccess = todo => {
-    return {
+export const addTodoSuccess = todo => ({
         type: ADD_TODO,
         todo
     }
-};
-export const addTodo = text => {
-    return async dispatch => {
+);
+export const addTodo = text => (
+    async dispatch => {
         try {
             const todo = {
                 text: text,
@@ -46,16 +45,14 @@ export const addTodo = text => {
             toastr.error(error);
         };
     }
-};
+);
 
-export const saveTodoSuccess = todo => {
-    return {
-        type: SAVE_TODO,
-        todo
-    };
-};
-export const saveTodo = todo => {
-    return async dispatch => {
+export const saveTodoSuccess = todo => ({
+    type: SAVE_TODO,
+    todo
+});
+export const saveTodo = todo => (
+    async dispatch => {
         try {
             const response = await axios.put(apiUrl + '/' + todo.id, todo);            
             dispatch(saveTodoSuccess(response.data));
@@ -63,35 +60,31 @@ export const saveTodo = todo => {
             toastr.error(error);
         };
     }
-};
+);
 
-export const deleteTodoSuccess = id => {
-    return {
-        type: DELETE_TODO,
-        payload: {
-            id
-        }
+export const deleteTodoSuccess = id => ({
+    type: DELETE_TODO,
+    payload: {
+        id
     }
-};
-export const deleteTodo = id => {
-    return async dispatch => {
+});
+export const deleteTodo = id => (
+    async dispatch => {
         try {
             const response = await axios.delete(`${apiUrl}/${id}`);
             dispatch(deleteTodoSuccess(response.data.id))
         } catch (error) {
             toastr.error(error);
         }
-    };
-};
+    }
+);
 
-export const deleteCompletedSuccess = todos => {
-    return {
-        type: DELETE_COMPLETED,
-        todos
-    };
-};
-export const deleteCompleted = (todos) => {
-    return dispatch => {
+export const deleteCompletedSuccess = todos => ({
+    type: DELETE_COMPLETED,
+    todos
+});
+export const deleteCompleted = todos => (
+    dispatch => {
         // Filter all todos except the ones to be removed
         const keepers = todos.filter(todo => !todo.completed);
         const losers = todos.filter(todo => todo.completed);
@@ -102,4 +95,4 @@ export const deleteCompleted = (todos) => {
             toastr.error(error);
         });
     }
-};
+);

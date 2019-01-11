@@ -105,8 +105,9 @@ const mapDispatchToProps = (dispatch, containerProps) => {
 */
 
 /* Below we use a short-hand notation for the mapDispatchToProps config.
- * The rule here is that if the prop callback and the function being passed to `dispatch` take the exact same args, we
- * can simply pass a "mapping" object for the mapDispatchToProps config.
+ * The rule here is that if the prop callback and the function being passed
+ * to `dispatch` take the exact same args, we can simply pass a "mapping"
+ * object for the mapDispatchToProps config.
  */ 
 export default withRouter(
     connect(

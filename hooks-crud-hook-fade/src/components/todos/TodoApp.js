@@ -36,13 +36,7 @@ const TodoApp = () => {
     }
 
     function onDeleteCompleted() {
-        const keepers = todos.filter(todo => !todo.completed);
-        const losers = todos.filter(todo => todo.completed);
-        const promises = losers.map( todo => todos.destroy(todo.id) );
-        Promise.all(promises)
-        .then(responses => {
-            todos.setData(keepers)
-        });
+        todos.destroyMany(todo => todo.completed);
     }
     
     function getTodosToShow(viewState) {
@@ -63,12 +57,20 @@ const TodoApp = () => {
     const completedCount = todos.reduce( (acc, todo) => todo.completed ? acc + 1 : acc, 0);
     const activeCount = todos.length() - completedCount;
 
+    const create = text => {
+        const todo = {
+            text: text,
+            completed: false
+        };
+        todos.create(todo);
+    }
+
     const spinner = <Spinner key={1} />;
     
     const content = todos.loading ? spinner : (
         <article className="todoapp">
             <header className="header">
-                <NewTodoForm addTodo={todos.create} />
+                <NewTodoForm addTodo={create} />
             </header>
             <main className="main">
                 <Route

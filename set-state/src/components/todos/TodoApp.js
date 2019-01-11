@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
-import toastr from '../../toastr';
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
 import NewTodoForm from './NewTodoForm';
 import TodoList from './TodoList';
 import TodoFooter from './TodoFooter';
@@ -16,18 +17,19 @@ class TodoApp extends Component {
         this.state = {
             todos: [],
         };
-        this.apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos'
+        this.apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos';
     }
 
     componentDidMount() {
-        try {
-            (async () => {
+        (async () => {
+            try {
                 const response = await axios.get(this.apiUrl);
                 this.setState({ todos: response.data });
-            })();
-        } catch(error) {
-            toastr.error(error);
-        }
+                return response;
+            } catch (error) {
+                toastr.error(error);
+            }
+        })();
     }
 
     getTodosToShow(viewState) {
