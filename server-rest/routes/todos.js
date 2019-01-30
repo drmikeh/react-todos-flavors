@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const errorMessage = { message: 'Todo not found.' };
+
 const reset = () => [
     { id: 1, title: 'Learn React', completed: true },
     { id: 2, title: 'Learn Redux', completed: true },
@@ -28,7 +30,7 @@ router.get('/:id', (req, res) => {
         res.status(200).json(found);
     }
     else {
-        res.status(404).json({ message: 'Todo not found' });
+        res.status(404).json(errorMessage);
     }
 });
 
@@ -46,8 +48,7 @@ router.post('/', function(req, res, next) {
           ...req.body
         };
         todos = [...todos, newTodo];
-        console.log('newTodo:', newTodo);
-        res.status(200).json(newTodo);
+        res.status(201).json(newTodo);
     }
 });
 
@@ -63,7 +64,7 @@ router.put('/:id', (req, res) => {
         res.status(200).json(updatedTodo);
     }
     else {
-        res.status(404).json({ message: 'Todo not found' });
+        res.status(404).json(errorMessage);
     }
 });
 
@@ -77,7 +78,7 @@ router.delete('/:id', (req, res) => {
         res.status(200).json(found);
     }
     else {
-        res.status(404).json({ message: 'Todo not found' });
+        res.status(404).json(errorMessage);
     }
 });
 
