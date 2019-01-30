@@ -1,0 +1,17 @@
+{
+  "name": "todos-server",
+  "version": "1.0.0",
+  "description": "server for react-todo-flavors",
+  "main": "server.js",
+  "author": "Dr. Mike Hopper",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1"
+  }
+}
