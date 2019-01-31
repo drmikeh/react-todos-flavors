@@ -1,7 +1,7 @@
 {
-  "name": "todos-server",
+  "name": "todos-graphql-server",
   "version": "1.0.0",
-  "description": "server for react-todo-flavors",
+  "description": "graphql server for react-todo-flavors",
   "main": "server.js",
   "author": "Dr. Mike Hopper",
   "license": "MIT",

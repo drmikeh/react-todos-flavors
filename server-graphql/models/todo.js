@@ -31,13 +31,9 @@ const destroyTodo = id => {
     return found;
 }
 
-// Root resolver
-const rootReducer = {
-    message: () => 'Hello World!',
-    todos: getTodos,
-    createTodo: input => createTodo(input.todo),
-    updateTodo: input => updateTodo(input.id, input.todo),
-    destroyTodo: input => destroyTodo(input.id)
+module.exports = {
+    getTodos,
+    createTodo,
+    updateTodo,
+    destroyTodo
 };
-
-module.exports = rootReducer;

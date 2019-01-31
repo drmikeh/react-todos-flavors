@@ -17,7 +17,8 @@ class TodoApp extends Component {
         this.state = {
             todos: [],
         };
-        this.apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos';
+        // this.apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos';
+        this.apiUrl = 'http://localhost:3000/todos'
     }
 
     componentDidMount() {
@@ -50,7 +51,7 @@ class TodoApp extends Component {
     async onAdd(val) {
         try {
             const todo = {
-                text: val,
+                title: val,
                 completed: false
             };
             const response = await axios.post(this.apiUrl, todo);
@@ -95,11 +96,11 @@ class TodoApp extends Component {
         };
     }
 
-    onUpdateText(id, text) {
+    onUpdateTitle(id, title) {
         const foundTodo = this.state.todos.find(todo => todo.id === id);
         const updatedTodo = {
             ...foundTodo,
-            text,
+            title,
         };
         this._saveTodo(updatedTodo);
     }
@@ -151,7 +152,7 @@ class TodoApp extends Component {
                                     todos={todosToShow}
                                     toggle={this.onToggleCompleted.bind(this)}
                                     remove={this.onDelete.bind(this)}
-                                    save={this.onUpdateText.bind(this)}
+                                    save={this.onUpdateTitle.bind(this)}
                                 />
                             );
                         }}/>
