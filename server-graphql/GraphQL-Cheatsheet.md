@@ -7,7 +7,7 @@ query messageAndTodos {
   message,
   todos {
     id,
-    text,
+    title,
     completed
   }
 }
@@ -21,7 +21,7 @@ query messageAndTodos {
 mutation createTodo($todo: TodoInput!) {
   createTodo(todo: $todo) {
     id,
-    text,
+    title,
     completed
   }
 }
@@ -32,7 +32,7 @@ Query Variables:
 ```
 {
   "todo": {
-    "text": "groceries",
+    "title": "groceries",
     "completed": false
   }
 }
@@ -44,7 +44,7 @@ Query Variables:
 mutation updateTodo($id: Int!, $todo: TodoInput!) {
   updateTodo(id: $id, todo: $todo) {
     id,
-    text
+    title
     completed
   }
 }
@@ -56,7 +56,7 @@ Query Variables:
 {
   "id": 3,
   "todo": {
-    "text": "groceries",
+    "title": "groceries",
     "completed": true
   }
 }
@@ -68,7 +68,7 @@ Query Variables:
 mutation destroyTodo($id: Int!) {
   destroyTodo(id: $id) {
     id,
-    text
+    title
     completed
   }
 }

@@ -36,8 +36,8 @@ const schema = buildSchema(`
         "The internal identifier of a Todo."
         id: Int
 
-        "The text for the Todo"
-        text: String
+        "The title for the Todo"
+        title: String
 
         "True of the Todo has been completed."
         completed: Boolean
@@ -45,8 +45,8 @@ const schema = buildSchema(`
 
     "A Todo without an identifier (cause it hasn't been created yet)."
     input TodoInput {
-        "The text for the Todo"
-        text: String
+        "The title for the Todo"
+        title: String
 
         "True of the Todo has been completed."
         completed: Boolean

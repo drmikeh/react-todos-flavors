@@ -1,4 +1,4 @@
-const { getTodos, createTodo, updateTodo, destroyTodo } = require('../models/todo');
+const { getTodos, createTodo, updateTodo, destroyTodo } = require('../models/Todos');
 
 const messageReducer = {
     message: () => 'Hello World!',
