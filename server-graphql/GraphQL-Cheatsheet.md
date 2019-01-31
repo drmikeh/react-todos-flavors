@@ -3,6 +3,18 @@
 ## Queries
 
 ```
+query todos {
+  todos {
+    id,
+    title,
+    completed
+  }
+}
+
+query message {
+  message
+}
+
 query messageAndTodos {
   message,
   todos {
@@ -32,8 +44,7 @@ Query Variables:
 ```
 {
   "todo": {
-    "title": "groceries",
-    "completed": false
+    "title": "Learn TDD"
   }
 }
 ```
@@ -56,8 +67,8 @@ Query Variables:
 {
   "id": 3,
   "todo": {
-    "title": "groceries",
-    "completed": true
+    "title": "Learn go",
+    "completed": false
   }
 }
 ```
@@ -78,6 +89,6 @@ Query Variables:
 
 ```
 {
-  "id": 1
+  "id": 2
 }
 ```
