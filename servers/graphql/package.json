@@ -2,14 +2,16 @@
   "name": "todos-graphql-server",
   "version": "1.0.0",
   "description": "graphql server for react-todo-flavors",
-  "main": "server.js",
+  "main": "src/server.js",
   "author": "Dr. Mike Hopper",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js",
-    "dev": "DEBUG=* nodemon server.js",
-    "model-tester": "mocha \"models/*.test.js\"",
-    "test": "yarn model-tester"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "dev-debug": "DEBUG=* nodemon src/server.js",
+    "model-tester": "mocha \"src/models/*.test.js\"",
+    "gql-tester": "mocha \"src/graphql/*.test.js\"",
+    "test": "yarn model-tester && concurrently --success first -k \"NODE_ENV=test node src/server.js\" \"yarn gql-tester\""
   },
   "dependencies": {
     "express": "^4.16.4",
@@ -18,6 +20,8 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^5.2.0"
+    "concurrently": "^4.1.0",
+    "mocha": "^5.2.0",
+    "supertest": "^3.4.2"
   }
 }
