@@ -1,13 +1,21 @@
 const expect = require('chai').expect;
 const { resetTodos, getTodos, getTodo, createTodo, updateTodo, destroyTodo } = require('../models/Todos');
+const TodosErrors = require('../models/TodosErrors');
 
-const expectRejection = (cb, done) => {
+const expectRejection = (cb, error, done) => {
     cb().then(data => {
         done(new Error('This should never happen!'));
     })
     .catch(err => {
-        expect(err).instanceOf(Error);
-        done();
+        try {
+            expect(err).to.not.equal(null);
+            expect(err).to.have.property('code').that.equals(error.code);
+            expect(err).to.have.property('message').that.equals(error.message);
+            done();
+        }
+        catch(err) {
+            done(err);
+        }
     });
 };
 
@@ -39,7 +47,7 @@ describe('Todos Model', () => {
 
     describe('getTodo', () => {
         it('should reject when given an invalid id', done => {
-            expectRejection(() => getTodo(123), done);
+            expectRejection(() => getTodo(123), TodosErrors.notFound, done);
         });
         it('should return Learn Redux when given the id', done => {
             getTodo(2)
@@ -56,7 +64,7 @@ describe('Todos Model', () => {
 
     describe('createTodo', () => {
         it('should reject when given an empty title', done => {
-            expectRejection(() => createTodo({ title: '' }), done);
+            expectRejection(() => createTodo({ title: '' }), TodosErrors.invalidTitle, done);
         });
         it('should return the new todo when given a valid title and default the completed status to false', done => {
             createTodo({ title: 'Learn go' })
@@ -86,10 +94,10 @@ describe('Todos Model', () => {
 
     describe('updateTodo', () => {
         it('should reject when given an invalid id', done => {
-            expectRejection(() => updateTodo(123, { title: '' }), done);
+            expectRejection(() => updateTodo(123, { title: 'Learn go' }), TodosErrors.notFound, done);
         });
         it('should reject when given an empty title', done => {
-            expectRejection(() => updateTodo(2, { title: '' }), done);
+            expectRejection(() => updateTodo(2, { title: '' }), TodosErrors.invalidTitle, done);
         });
         it('should return the new todo when given a valid title and a true completed status', done => {
             updateTodo(2, { title: 'Learn go', completed: true })
@@ -107,7 +115,7 @@ describe('Todos Model', () => {
 
     describe('destroyTodo', () => {
         it('should reject when given an invalid id', done => {
-            expectRejection(() => destroyTodo(123), done);
+            expectRejection(() => destroyTodo(123), TodosErrors.notFound, done);
         });
         it('should return the deleted todo when given a valid id', done => {
             destroyTodo(2)

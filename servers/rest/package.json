@@ -5,9 +5,10 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "PORT=3002 nodemon ./bin/www",
-    "tester": "NODE_ENV=test mocha \"routes/*.test.js\"",
-    "test": "concurrently --success first -k \"NODE_ENV=test PORT=3004 node ./bin/www\" \"yarn tester\""
+    "dev": "DEBUG=server-rest:* nodemon ./bin/www",
+    "model-tester": "mocha \"models/*.test.js\"",
+    "route-tester": "mocha \"routes/*.test.js\"",
+    "test": "yarn model-tester && concurrently --success first -k \"NODE_ENV=test PORT=3004 node ./bin/www\" \"yarn route-tester\""
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
