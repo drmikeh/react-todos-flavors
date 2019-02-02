@@ -28,7 +28,7 @@ describe('Todos Routes', () => {
     });
 
     describe('SHOW ROUTE', () => {
-        it('should return a 404 response and when given an invalid id', done => {
+        it('should return a 404 response when given an invalid id', done => {
             api.get('/123')
                 .set('Accept', 'application/json')
                 .expect(TodosErrors.notFound.code)
@@ -75,7 +75,25 @@ describe('Todos Routes', () => {
                     done(err);
                 });
         });
-        it('should return a 201 response and return the new todo when given a valid title', done => {
+        it('should return the new todo when given a valid title and default the completed status to false', done => {
+            api.post('/')
+                .set('Accept', 'application/json')
+                .send({
+                    title: 'Learn TDD'
+                })
+                .expect(201)
+                .then(res => {
+                    const todo = res.body;
+                    expect(todo).to.not.equal(null);
+                    expect(todo).to.have.property('title').that.equals('Learn TDD');
+                    expect(todo).to.have.property('completed').that.equals(false);
+                    done();
+                })
+                .catch(err => {
+                    done(err);
+                });
+        });
+        it('should return the new todo when given a valid title and a completed status of true', done => {
             api.post('/')
                 .set('Accept', 'application/json')
                 .send({
@@ -145,6 +163,37 @@ describe('Todos Routes', () => {
                     expect(todo).to.not.equal(null);
                     expect(todo).to.have.property('title').that.equals('Learn go');
                     expect(todo).to.have.property('completed').that.equals(true);
+                    done();
+                })
+                .catch(err => {
+                    done(err);
+                });
+        });
+    });
+
+    describe('destroyTodo', () => {
+        it('should return a 404 response when given an invalid id', done => {
+            api.delete('/123')
+                .set('Accept', 'application/json')
+                .expect(TodosErrors.notFound.code)
+                .then(res => {
+                    const error = res.body;
+                    expect(error).to.not.equal(null);
+                    expect(error).to.have.property('message').that.equals(TodosErrors.notFound.message);
+                    done();
+                })
+                .catch(err => {
+                    done(err);
+                });
+        });
+        it('should return the deleted todo when given a valid id', done => {
+            api.delete('/3')
+                .set('Accept', 'application/json')
+                .expect(200)
+                .then(res => {
+                    const todo = res.body;
+                    expect(todo).to.not.equal(null);
+                    expect(todo).to.have.property('title').that.equals('Learn GraphQL');
                     done();
                 })
                 .catch(err => {
