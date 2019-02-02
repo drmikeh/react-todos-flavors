@@ -1,4 +1,4 @@
-const { getTodos, createTodo, updateTodo, destroyTodo } = require('../models/Todos');
+const { getTodos, getTodo, createTodo, updateTodo, destroyTodo } = require('../models/Todos');
 
 const messageReducer = {
     message: () => 'Hello World!',
@@ -6,6 +6,13 @@ const messageReducer = {
 
 const todosReducer = {
     todos: getTodos,
+    todo: input => {
+        return getTodo(input.id)
+            .then(todo => todo)
+            .catch(err => {
+                throw err.message;
+            });
+        },
     createTodo: input => {
         return createTodo(input.todo)
             .then(todo => todo)

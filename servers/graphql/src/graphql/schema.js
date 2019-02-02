@@ -17,6 +17,9 @@ const schema = buildSchema(`
         
         "A list of todos."
         todos: [Todo!]!
+
+        "A single todo."
+        todo(id: Int!): Todo!
     }
     
     "All of the mutations go here."
