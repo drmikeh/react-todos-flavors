@@ -15,6 +15,11 @@
     "todomvc-app-css": "^2.1.2",
     "todomvc-common": "^1.0.5"
   },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.8.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
