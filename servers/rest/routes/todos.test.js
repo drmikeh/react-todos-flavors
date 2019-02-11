@@ -2,9 +2,21 @@ const expect = require('chai').expect;
 const supertest = require('supertest');
 const TodosErrors = require('../models/TodosErrors');
 
-const api = supertest('localhost:3004/todos');
+const port = process.env.PORT || '3000';
+const api = supertest(`localhost:${port}/todos`);
 
 describe('Todos Routes', () => {
+
+    let server;
+    before(next => {
+        server = require('../bin/www');
+        next();
+    });
+    after(next => {
+        server.close();
+        next();
+    });
+
     describe('INDEX ROUTE', () => {
         it('should return a 200 response and return 3 todos each having a title', done => {
             api.get('/')

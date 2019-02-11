@@ -2,7 +2,8 @@ const expect = require('chai').expect;
 const supertest = require('supertest');
 const TodosErrors = require('../models/TodosErrors');
 
-const api = supertest('localhost:4000/graphql');
+const port = process.env.PORT || '4000';
+const api = supertest(`localhost:${port}/graphql`);
 
 const todosQuery =
 `query todos {
@@ -50,6 +51,16 @@ mutation destroyTodo($id: Int!) {
     }
 }
 `;
+
+let server;
+before(next => {
+    server = require('../server');
+    next();
+});
+after(next => {
+    server.close();
+    next();
+});
 
 describe('Todo Queries', () => {
     describe('Todos Query', () => {

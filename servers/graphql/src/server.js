@@ -12,4 +12,16 @@ app.use('/graphql', express_graphql({
     graphiql: true
 }));
 
-app.listen(4000, () => console.log('Express GraphQL Server Now Running On localhost:4000/graphql'));
+const port = process.env.PORT || 4000;
+const server = app.listen(port, () => {
+  console.log(`Express GraphQL Server Now Running On localhost:${port}/graphql`)
+});
+
+const close = () => {
+  console.log("Shutting down server");
+  server.close();
+}
+
+module.exports = {
+  close
+};

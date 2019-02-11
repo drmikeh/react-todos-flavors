@@ -18,15 +18,13 @@ const TodoApp = () => {
     console.log('TodoApp');
     
     // initial load of todos data
-    useEffect(() => {
-        (async () => {
-            try {
-                const response = await axios.get(apiUrl);
-                setTodos(response.data);
-            } catch(error) {
-                toastr.error(error);
-            }
-        })();
+    useEffect(async () => {
+        try {
+            const response = await axios.get(apiUrl);
+            setTodos(response.data);
+        } catch(error) {
+            toastr.error(error);
+        }
     }, []);
     /* The 2nd arg above is a watch list of variables that trigger the effect.
      * If the list is empty, the effect only executes once (cDM).

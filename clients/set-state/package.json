@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "concurrently": "^4.1.0",
     "font-awesome": "^4.7.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -24,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "ci-test": "CI=true react-scripts test",
+    "ci-test-helper": "CI=true react-scripts test",
+    "ci-test": "concurrently --success first -k \"NODE_ENV=test PORT=3000 node ../../servers/rest/bin/www\" \"yarn ci-test-helper\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
