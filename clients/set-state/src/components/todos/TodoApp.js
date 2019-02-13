@@ -19,8 +19,13 @@ class TodoApp extends Component {
         };
     }
 
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
     async componentDidMount() {
         try {
+            this._isMounted = true;
             const response = await TodosFetcher.get();
             this.setState({ todos: response.data });
             return response;

@@ -6,21 +6,24 @@ import TodoApp from '../todos/TodoApp';
 import Todo from '../todos/Todo';
 import TodosFetcher from '../../TodosFetcher';
 
-function mountApp() {
-    return ( mount(<App />) );
+async function mountApp() {
+    if (wrapper) {
+        wrapper.unmount();
+    }
+    wrapper = mount(<App />);
+    const promise = await asyncFlush();
+    wrapper.update(); // waits for TodoApp's componentDidMount to call setState
+    return promise;
 }
 
-const DELAY_MILLIS = 50;
+const DELAY_MILLIS = 100;
 const asyncFlush = (delay = DELAY_MILLIS) => new Promise(resolve => setTimeout(resolve, delay));
 
 let wrapper = null;
 
 beforeEach(async () => {
-    TodosFetcher.reset();
-    await asyncFlush();
-    wrapper = mountApp();
-    await asyncFlush();
-    wrapper.update();
+    await TodosFetcher.reset(); // reset the server's list of todos
+    await mountApp();
 });
 
 function verifyTodo(wrapper, expectedTitle, expectedCompleted) {
@@ -32,7 +35,7 @@ function verifyTodo(wrapper, expectedTitle, expectedCompleted) {
 
 describe('React Todos App with Set State', () => {
     it('renders without crashing', () => {
-      mountApp();
+        // nothing to do here as the `beforeEach` is mounting the component for us.    
     });
 
     it('renders todos title', () => {
@@ -54,7 +57,7 @@ describe('React Todos App with Set State', () => {
         });
     });
 
-    it('can update an existing todo', () => {
+    it("can update an existing todo's title", () => {
         // We need jest to wait until the axios data arrives, so we return a Promise that
         // is resolved after the data arrives.
         return new Promise(async (resolve, reject) => {
@@ -62,12 +65,29 @@ describe('React Todos App with Set State', () => {
             const todoApp = wrapper.find(TodoApp);
             todoApp.instance().onUpdateTitle(2, 'Learn Go')
             .then(async () => {
-                wrapper = mountApp();
+                mountApp();   // we must remount the component because Enzyme wrappers are immutable.
                 await asyncFlush();
                 wrapper.update();
                 verifyTodo(wrapper.find(Todo).at(1), 'Learn Go', true);
                 resolve('all done');
             });
+        });
+    });
+
+    it("can toggle an existing todo's completed status", () => {
+        // We need jest to wait until the axios data arrives, so we return a Promise that
+        // is resolved after the data arrives.
+        return new Promise(async (resolve, reject) => {
+            expect(wrapper.find(Todo).length).to.equal(3);
+            const todoApp = wrapper.find(TodoApp);
+            todoApp.instance().onToggleCompleted(2)
+                .then(async () => {
+                    mountApp(); // we must remount the component because Enzyme wrappers are immutable.
+                    await asyncFlush();
+                    wrapper.update();
+                    verifyTodo(wrapper.find(Todo).at(1), 'Learn Redux', false);
+                    resolve('all done');
+                });
         });
     });
             
@@ -79,6 +99,7 @@ describe('React Todos App with Set State', () => {
             const todoApp = wrapper.find(TodoApp);
             todoApp.instance().onAdd('Groceries')
             .then(() => {
+                // mountApp();   // here remounting causes this test to fail, I don't know why!
                 wrapper.update();
                 expect(wrapper.find(Todo).length).to.equal(4);
                 verifyTodo(wrapper.find(Todo).at(3), 'Groceries', false);
