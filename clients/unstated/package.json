@@ -2,6 +2,7 @@
   "name": "set-state",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3002/",
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
@@ -15,10 +16,18 @@
     "todomvc-common": "^1.0.5",
     "unstated": "^2.1.1"
   },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "concurrently": "^4.1.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "ci-test-helper": "CI=true react-scripts test",
+    "ci-test": "concurrently --success first -k \"NODE_ENV=test PORT=3000 node ../../servers/rest/bin/www\" \"yarn ci-test-helper\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

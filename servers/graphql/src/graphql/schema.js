@@ -13,7 +13,7 @@ const schema = buildSchema(`
     "All of the queries go here."
     type Query {
         "Just a simple greeting message."
-        message: String
+        message: String!
         
         "A list of todos."
         todos: [Todo!]!

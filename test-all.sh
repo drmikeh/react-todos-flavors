@@ -20,5 +20,10 @@ cd set-state
 yarn ci-test
 cd ..
 
+echo "=== unstated Client ==="
+cd unstated
+yarn ci-test
+cd ..
+
 echo "=== All Done ==="
 

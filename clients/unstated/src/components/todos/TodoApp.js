@@ -15,11 +15,11 @@ const TodosRenderer = todosContainer => {
     const completedCount = todos.reduce( (acc, todo) => todo.completed ? acc + 1 : acc, 0);
     const activeCount = todos.length - completedCount;
 
-    function onUpdateText(id, text) {
+    function onUpdateTitle(id, title) {
         const foundTodo = todos.find(todo => todo.id === id);
         const updatedTodo = {
             ...foundTodo,
-            text,
+            title,
         };
         todosContainer.save(updatedTodo);
     }
@@ -51,7 +51,7 @@ const TodosRenderer = todosContainer => {
                                 todos={todosToShow}
                                 toggle={onToggleCompleted}
                                 remove={todosContainer.delete}
-                                save={onUpdateText}
+                                save={onUpdateTitle}
                             />
                         );
                     }}/>
