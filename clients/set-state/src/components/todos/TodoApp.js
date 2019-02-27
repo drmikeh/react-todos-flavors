@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
-import TodosFetcher from '../../TodosFetcher';
+import TodoService from '../../services/TodoService';
 import NewTodoForm from './NewTodoForm';
 import TodoList from './TodoList';
 import TodoFooter from './TodoFooter';
@@ -26,7 +26,7 @@ class TodoApp extends Component {
     async componentDidMount() {
         try {
             this._isMounted = true;
-            const response = await TodosFetcher.get();
+            const response = await TodoService.get();
             this.setState({ todos: response.data });
             return response;
         } catch (error) {
@@ -34,7 +34,7 @@ class TodoApp extends Component {
         }
     }
 
-    getTodosToShow(viewState) {
+    filterTodos(viewState) {
         return this.state.todos.filter(todo => {
             switch (viewState) {
                 case ALL_TODOS:
@@ -55,7 +55,7 @@ class TodoApp extends Component {
                 title: val,
                 completed: false
             };
-            const response = await TodosFetcher.post(todo);
+            const response = await TodoService.post(todo);
             this.setState({
                 todos: [...this.state.todos, response.data]
             });
@@ -70,7 +70,7 @@ class TodoApp extends Component {
         try {
             // Filter all todos except the one to be deleted
             const remaining = this.state.todos.filter(todo => todo.id !== id);
-            const response = await TodosFetcher.delete(id);
+            const response = await TodoService.delete(id);
             this.setState({
                 todos: remaining
             });
@@ -86,7 +86,7 @@ class TodoApp extends Component {
      */
     async _saveTodo(todo) {
         try {
-            const response = await TodosFetcher.put(todo);
+            const response = await TodoService.put(todo);
             const updatedTodoFromServer = response.data;
             const newTodos = this.state.todos.map(todo => (
                 todo.id !== updatedTodoFromServer.id ? todo : updatedTodoFromServer
@@ -125,7 +125,7 @@ class TodoApp extends Component {
         // Filter all todos except the ones to be deleted
         const keepers = this.state.todos.filter(todo => !todo.completed);
         const losers = this.state.todos.filter(todo => todo.completed);
-        const promises = losers.map( todo => TodosFetcher.delete(todo.id) );
+        const promises = losers.map( todo => TodoService.delete(todo.id) );
         return Promise.all(promises)
         .then(responses => {
             this.setState({
@@ -152,7 +152,7 @@ class TodoApp extends Component {
                     <main className="main">
                         <Route path="/:filter?" render={props => {
                             const filter = props.match.params.filter || ALL_TODOS;
-                            const todosToShow = this.getTodosToShow(filter);
+                            const todosToShow = this.filterTodos(filter);
                             return (
                                 <TodoList
                                     {...props}

@@ -25,7 +25,7 @@ const getTodo = id => {
 
 const createTodo = todo => {
     if (!isValidTitle(todo)) return Promise.reject(TodosErrors.invalidTitle);
-    const newId = todos.reduce((a, b) => a.id > b.id ? a.id : b.id, { id: 0 }) + 1;
+    const newId = todos.reduce((a, b) => a.id > b.id ? a : b, { id: 0 }).id + 1;
     const newTodo = { id: newId, completed: false, ...todo };
     todos = [ ...todos, newTodo ];
     return Promise.resolve(newTodo);

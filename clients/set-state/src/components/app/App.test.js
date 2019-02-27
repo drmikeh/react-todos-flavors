@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import App from './App';
 import TodoApp from '../todos/TodoApp';
 import Todo from '../todos/Todo';
-import TodosFetcher from '../../TodosFetcher';
+import TodoService from '../../services/TodoService';
 
 async function mountApp() {
     if (wrapper) {
@@ -22,7 +22,7 @@ const asyncFlush = (delay = DELAY_MILLIS) => new Promise(resolve => setTimeout(r
 let wrapper = null;
 
 beforeEach(async () => {
-    await TodosFetcher.reset(); // reset the server's list of todos
+    await TodoService.reset(); // reset the server's list of todos
     await mountApp();
 });
 
