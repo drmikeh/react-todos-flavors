@@ -1,6 +1,1 @@
-{
-    "baseUrl": "http://localhost:3000",
-    "env": {
-        "serverUrl": "/api/todos"
-    }
-}
+../common/cypress.json

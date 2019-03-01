@@ -1,0 +1,13 @@
+{
+    "baseUrl": "http://localhost:3000",
+    "fileServerFolder": "../common/cypress",
+    "integrationFolder": "../common/cypress/integration",
+    "fixturesFolder": "../common/cypress/fixtures",
+    "pluginsFile": "../common/cypress/plugins",
+    "screenshotsFolder": "../common/cypress/screenshots",
+    "supportFile": "../common/cypress/support",
+    "videosFolder": "../common/cypress/videos",
+    "env": {
+        "serverUrl": "/api/todos"
+    }
+}
