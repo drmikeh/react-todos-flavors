@@ -15,6 +15,7 @@ const NewTodoForm = ({ addTodo }) => {
         >
             <input
                 type="text"
+                autoFocus
                 className = "new-todo"
                 placeholder = "What needs to be done?"
                 ref={node => {

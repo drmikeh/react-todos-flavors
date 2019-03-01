@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import TodoService from '../../services/TodoService';
 import useCrud from '../../hooks/use-crud';
-import toastr from '../../toastr';
 import 'toastr/build/toastr.min.css';
 import NewTodoForm from './NewTodoForm';
 import TodoList from './TodoList';
@@ -12,16 +12,15 @@ import 'todomvc-common/base.css';
 import 'todomvc-app-css/index.css';
 
 const TodoApp = () => {
-    const apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos';
-    const todos = useCrud(apiUrl, []);
+    const todos = useCrud(TodoService, []);
 
     console.log('TodoApp');
 
-    function onUpdateText(id, text) {
+    function onUpdateText(id, title) {
         const foundTodo = todos.find(id);
         const updatedTodo = {
             ...foundTodo,
-            text,
+            title,
         };
         todos.update(updatedTodo);
     }
@@ -57,9 +56,9 @@ const TodoApp = () => {
     const completedCount = todos.reduce( (acc, todo) => todo.completed ? acc + 1 : acc, 0);
     const activeCount = todos.length() - completedCount;
 
-    const create = text => {
+    const create = title => {
         const todo = {
-            text: text,
+            title: title,
             completed: false
         };
         todos.create(todo);

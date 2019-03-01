@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
-import axios from 'axios';
+import TodoService from '../../services/TodoService';
 import toastr from '../../toastr';
 import 'toastr/build/toastr.min.css';
 import NewTodoForm from './NewTodoForm';
@@ -12,7 +12,6 @@ import 'todomvc-common/base.css';
 import 'todomvc-app-css/index.css';
 
 const TodoApp = () => {
-    const apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos';
     const [todos, setTodos] = useState([]);
 
     console.log('TodoApp');
@@ -20,7 +19,7 @@ const TodoApp = () => {
     // initial load of todos data
     useEffect(async () => {
         try {
-            const response = await axios.get(apiUrl);
+            const response = await TodoService.get();
             setTodos(response.data);
         } catch(error) {
             toastr.error(error);
@@ -52,10 +51,10 @@ const TodoApp = () => {
     async function onAdd(val) {
         try {
             const todo = {
-                text: val,
+                title: val,
                 completed: false
             };
-            const response = await axios.post(apiUrl, todo);
+            const response = await TodoService.post(todo);
             setTodos([...todos, response.data]);
         } catch(error) {
             toastr.error(error);
@@ -66,7 +65,7 @@ const TodoApp = () => {
         try {
             // Filter all todos except the one to be removed
             const remaining = todos.filter(todo => todo.id !== id);
-            await axios.delete(apiUrl + '/' + id);
+            await TodoService.delete(id);
             setTodos(remaining);
         } catch(error) {
             toastr.error(error);
@@ -75,7 +74,7 @@ const TodoApp = () => {
 
     async function saveTodo(updatedTodo) {
         try {
-            const response = await axios.put(apiUrl + '/' + updatedTodo.id, updatedTodo)
+            const response = await TodoService.put(updatedTodo)
             const updatedTodoFromServer = response.data;
             const newTodos = todos.map(todo => todo.id !== updatedTodoFromServer.id ? todo : updatedTodoFromServer);
             setTodos(newTodos);
@@ -84,11 +83,11 @@ const TodoApp = () => {
         };
     }
 
-    function onUpdateText(id, text) {
+    function onUpdateTitle(id, title) {
         const foundTodo = todos.find(todo => todo.id === id);
         const updatedTodo = {
             ...foundTodo,
-            text,
+            title,
         };
         saveTodo(updatedTodo);
     }
@@ -105,7 +104,7 @@ const TodoApp = () => {
     function onDeleteCompleted() {
         const keepers = todos.filter(todo => !todo.completed);
         const losers = todos.filter(todo => todo.completed);
-        const promises = losers.map( todo => axios.delete(apiUrl + '/' + todo.id) );
+        const promises = losers.map( todo => TodoService.delete(todo.id) );
         Promise.all(promises)
         .then(responses => {
             setTodos(keepers)
@@ -136,7 +135,7 @@ const TodoApp = () => {
                                 todos={todosToShow}
                                 toggle={onToggleCompleted}
                                 remove={onDelete}
-                                save={onUpdateText}
+                                save={onUpdateTitle}
                             />
                         );
                     }}/>

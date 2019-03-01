@@ -44,7 +44,7 @@ const TodosRenderer = todosContainer => {
                 <main className="main">
                     <Route path="/:filter?" render={props => {
                         const filter = props.match.params.filter || ALL_TODOS;
-                        const todosToShow = todosContainer.getTodosToShow(filter);
+                        const todosToShow = todosContainer.filterTodos(filter);
                         return (
                             <TodoList
                                 {...props}

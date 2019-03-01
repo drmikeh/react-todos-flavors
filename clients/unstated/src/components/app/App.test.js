@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import App from './App';
 import TodoApp from '../todos/TodoApp';
 import Todo from '../todos/Todo';
-import TodosFetcher from '../../TodosFetcher';
+import TodoService from '../../services/TodoService';
 
 async function mountApp() {
     if (wrapper) {
@@ -22,7 +22,7 @@ const asyncFlush = (delay = DELAY_MILLIS) => new Promise(resolve => setTimeout(r
 let wrapper = null;
 
 beforeEach(async () => {
-    await TodosFetcher.reset(); // reset the server's list of todos
+    await TodoService.reset(); // reset the server's list of todos
     await mountApp();
 });
 
@@ -57,7 +57,7 @@ describe('React Todos App with Set State', () => {
         });
     });
 
-    xit("can update an existing todo's title", () => {
+    it("can update an existing todo's title", () => {
         // We need jest to wait until the axios data arrives, so we return a Promise that
         // is resolved after the data arrives.
         return new Promise(async (resolve, reject) => {
@@ -77,7 +77,7 @@ describe('React Todos App with Set State', () => {
         });
     });
 
-    xit("can toggle an existing todo's completed status", () => {
+    it("can toggle an existing todo's completed status", () => {
         // We need jest to wait until the axios data arrives, so we return a Promise that
         // is resolved after the data arrives.
         return new Promise(async (resolve, reject) => {
@@ -95,7 +95,7 @@ describe('React Todos App with Set State', () => {
         });
     });
             
-    xit('can create a new todo', () => {
+    it('can create a new todo', () => {
         // We need jest to wait until the axios data arrives, so we return a Promise that
         // is resolved after the data arrives.
         return new Promise(async (resolve, reject) => {

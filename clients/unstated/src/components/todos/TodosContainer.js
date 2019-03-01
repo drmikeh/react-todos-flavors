@@ -1,8 +1,8 @@
-import { Container } from 'unstated';
-import TodosFetcher from '../../TodosFetcher';
-import toastr from '../../toastr';
-import 'toastr/build/toastr.min.css';
-import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from './TodoViewStates';
+import { Container } from 'unstated'
+import TodoService from '../../services/TodoService'
+import toastr from '../../toastr'
+import 'toastr/build/toastr.min.css'
+import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from './TodoViewStates'
 
 class TodosContainer extends Container {
     state = {
@@ -10,66 +10,66 @@ class TodosContainer extends Container {
     }
 
     constructor() {
-        super();
-        this.fetchTodos();
+        super()
+        this.fetchTodos()
     }
 
     fetchTodos = async () => {
         try {
-            const response = await TodosFetcher.get();
+            const response = await TodoService.get()
             this.setState({
                 todos: response.data
-            });
-            return response;
+            })
+            return response
         } catch (error) {
             toastr.error(error)
         }
     }
 
-    getTodosToShow = viewState => {
+    filterTodos = viewState => {
         return this.state.todos.filter(todo => {
             switch (viewState) {
                 case ALL_TODOS:
-                    return true;
+                    return true
                 case ACTIVE_TODOS:
-                    return !todo.completed;
+                    return !todo.completed
                 case COMPLETED_TODOS:
-                    return todo.completed;
+                    return todo.completed
                 default:
-                    return false;
+                    return false
             }
-        });
+        })
     }
 
     add = async val => {
         try {
             const todo = {
-                text: val,
+                title: val,
                 completed: false
-            };
-            const response = await TodosFetcher.post(todo);
+            }
+            const response = await TodoService.post(todo)
             this.setState({
                 todos: [...this.state.todos, response.data]
-            });
-            return response;
+            })
+            return response
         } catch (error) {
-            console.log('ERROR:', error);
-            toastr.error(error);
-        };
+            console.log('ERROR:', error)
+            toastr.error(error)
+        }
     }
 
     delete = async id => {
         try {
             // Filter all todos except the one to be deleted
-            const remaining = this.state.todos.filter(todo => todo.id !== id);
-            const response = await TodosFetcher.delete(id);
+            const remaining = this.state.todos.filter(todo => todo.id !== id)
+            const response = await TodoService.delete(id)
             this.setState({
                 todos: remaining
-            });
-            return response;
+            })
+            return response
         } catch (error) {
-            toastr.error(error);
-        };
+            toastr.error(error)
+        }
     }
 
     /* Starting the name with an underscore is a naming convention to indicate
@@ -78,34 +78,34 @@ class TodosContainer extends Container {
      */
     save = async todo => {
         try {
-            const response = await TodosFetcher.put(todo);
-            const updatedTodoFromServer = response.data;
+            const response = await TodoService.put(todo)
+            const updatedTodoFromServer = response.data
             const newTodos = this.state.todos.map(todo => (
                 todo.id !== updatedTodoFromServer.id ? todo : updatedTodoFromServer
-            ));
+            ))
             this.setState({
                 todos: newTodos,
-            });
-            return response;
+            })
+            return response
         } catch (error) {
-            toastr.error(error);
-        };
+            toastr.error(error)
+        }
     }
 
     deleteCompleted = async () => {
         // Filter all todos except the ones to be deleted
-        const keepers = this.state.todos.filter(todo => !todo.completed);
-        const losers = this.state.todos.filter(todo => todo.completed);
-        const promises = losers.map(todo => TodosFetcher.delete(todo.id));
+        const keepers = this.state.todos.filter(todo => !todo.completed)
+        const losers = this.state.todos.filter(todo => todo.completed)
+        const promises = losers.map(todo => TodoService.delete(todo.id))
         return Promise.all(promises)
             .then(responses => {
                 this.setState({
                     todos: keepers
-                });
+                })
             }).catch(error => {
-                toastr.error(error);
-            });
+                toastr.error(error)
+            })
     }
 }
 
-export default TodosContainer;
+export default TodosContainer
