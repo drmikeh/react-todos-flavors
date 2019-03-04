@@ -7,6 +7,7 @@
     "screenshotsFolder": "../common/cypress/screenshots",
     "supportFile": "../common/cypress/support",
     "videosFolder": "../common/cypress/videos",
+    "video": false,
     "env": {
         "serverUrl": "/api/todos"
     }

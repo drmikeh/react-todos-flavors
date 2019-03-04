@@ -1,20 +1,18 @@
 #!/bin/bash
 
-echo "=== set-state ==="
-cd set-state
-yarn cypress:cicd
+declare -a clients=(
+    "set-state"
+    "unstated"
+    "hooks"
+    "hooks-crud-hook"
+    "hooks-crud-hook-fade"
+)
 
-echo "=== unstated ==="
-cd ../unstated
-yarn cypress:cicd
-
-echo "=== hooks ==="
-cd ../hooks
-yarn cypress:cicd
-
-echo "=== hooks-crud-hook ==="
-cd ../hooks-crud-hook
-yarn cypress:cicd
-
-cd ..
+for client in "${clients[@]}"
+do
+  echo "=== ${client} ==="
+  cd "${client}"
+  yarn cypress:cicd
+  cd ..
+done
 

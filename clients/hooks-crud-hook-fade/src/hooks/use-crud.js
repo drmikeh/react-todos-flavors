@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import TodoService from '../services/TodoService';
 import toastr from '../toastr';
 import 'toastr/build/toastr.min.css';
 
-function useCrud(apiUrl, initialValue, initialLoading) {
+function useCrud(service, initialValue, initialLoading) {
     const [items, setItems] = useState(initialValue);
     const [loading, setLoading] = useState(initialLoading);
 
@@ -12,7 +12,7 @@ function useCrud(apiUrl, initialValue, initialLoading) {
         (async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(apiUrl);
+                const response = await TodoService.get();
                 setTimeout(() => {
                     console.log('loading done');
                     setLoading(false);
@@ -33,7 +33,7 @@ function useCrud(apiUrl, initialValue, initialLoading) {
 
     async function create(item) {
         try {
-            const response = await axios.post(apiUrl, item);
+            const response = await TodoService.post(item);
             setItems([...items, response.data]);
         } catch (error) {
             toastr.error(error);
@@ -44,7 +44,7 @@ function useCrud(apiUrl, initialValue, initialLoading) {
         try {
             // Filter all items except the one to be removed
             const remaining = items.filter(item => item.id !== id);
-            await axios.delete(apiUrl + '/' + id);
+            await TodoService.delete(id);
             setItems(remaining);
         } catch (error) {
             toastr.error(error);
@@ -54,7 +54,7 @@ function useCrud(apiUrl, initialValue, initialLoading) {
     async function destroyMany(filter) {
         const keepers = items.filter(item => !filter(item));
         const losers = items.filter(item => filter(item));
-        const promises = losers.map(item => axios.delete(apiUrl + '/' + item.id));
+        const promises = losers.map(item => TodoService.delete(item.id));
         Promise.all(promises)
             .then(responses => {
                 setItems(keepers)
@@ -68,7 +68,7 @@ function useCrud(apiUrl, initialValue, initialLoading) {
 
     async function update(updatedItem) {
         try {
-            const response = await axios.put(apiUrl + '/' + updatedItem.id, updatedItem)
+            const response = await TodoService.put(updatedItem)
             const updatedItemFromServer = response.data;
             const newItems = items.map(item => item.id !== updatedItemFromServer.id ? item : updatedItemFromServer);
             setItems(newItems);

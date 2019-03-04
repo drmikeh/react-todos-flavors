@@ -20,7 +20,8 @@
     "concurrently": "^4.1.0",
     "cypress": "^3.1.5",
     "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.9.1"
+    "enzyme-adapter-react-16": "^1.9.1",
+    "start-server-and-test": "^1.7.11"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,7 +31,8 @@
     "ci-test-helper": "CI=true react-scripts test",
     "ci-test": "concurrently --success first -k \"NODE_ENV=test PORT=3002 node ../../servers/rest/bin/www\" \"yarn ci-test-helper\"",
     "cypress": "cypress open",
-    "cypress:cicd": "concurrently --success first -k \"yarn start\" \"cypress run\""
+    "cypress:run": "cypress run",
+    "cypress:cicd": "start-server-and-test start http-get://localhost:3000 cypress:run"
   },
   "eslintConfig": {
     "extends": "react-app"

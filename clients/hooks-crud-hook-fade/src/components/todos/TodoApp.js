@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import ReactCSSTransitionReplace from 'react-css-transition-replace';
+import TodoService from '../../services/TodoService';
 import useCrud from '../../hooks/use-crud';
 import Spinner from '../spinner/Spinner';
 import NewTodoForm from './NewTodoForm';
@@ -12,16 +13,15 @@ import 'todomvc-common/base.css';
 import 'todomvc-app-css/index.css';
 
 const TodoApp = () => {
-    const apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos';
-    const todos = useCrud(apiUrl, [], true);
+    const todos = useCrud(TodoService, [], true);
 
     console.log('TodoApp:', todos.loading ? 'true' : 'false');
 
-    function onUpdateText(id, text) {
+    function onUpdateTitle(id, title) {
         const foundTodo = todos.find(id);
         const updatedTodo = {
             ...foundTodo,
-            text,
+            title,
         };
         todos.update(updatedTodo);
     }
@@ -57,9 +57,9 @@ const TodoApp = () => {
     const completedCount = todos.reduce( (acc, todo) => todo.completed ? acc + 1 : acc, 0);
     const activeCount = todos.length() - completedCount;
 
-    const create = text => {
+    const create = title => {
         const todo = {
-            text: text,
+            title: title,
             completed: false
         };
         todos.create(todo);
@@ -85,7 +85,7 @@ const TodoApp = () => {
                                 todos={todosToShow}
                                 toggle={onToggleCompleted}
                                 remove={todos.destroy}
-                                save={onUpdateText}
+                                save={onUpdateTitle}
                             />
                         );
                     }}

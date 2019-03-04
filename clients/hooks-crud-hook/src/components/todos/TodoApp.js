@@ -16,7 +16,7 @@ const TodoApp = () => {
 
     console.log('TodoApp');
 
-    function onUpdateText(id, title) {
+    function onUpdateTitle(id, title) {
         const foundTodo = todos.find(id);
         const updatedTodo = {
             ...foundTodo,
@@ -82,7 +82,7 @@ const TodoApp = () => {
                                 todos={todosToShow}
                                 toggle={onToggleCompleted}
                                 remove={todos.destroy}
-                                save={onUpdateText}
+                                save={onUpdateTitle}
                             />
                         );
                     }}/>
