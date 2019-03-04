@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "PORT=3002 DEBUG=server-rest:* nodemon ./bin/www",
-    "model-tester": "mocha \"models/*.test.js\"",
-    "route-tester": "mocha \"routes/*.test.js\"",
-    "test": "PORT=3004 yarn model-tester && yarn route-tester"
+    "model-tester": "jest --testPathPattern=\"models/.*\\.test\\.js\"",
+    "route-tester": "PORT=3004 jest --testPathPattern=\"routes/.*\\.test\\.js\"",
+    "test": "yarn model-tester && yarn route-tester"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -18,8 +18,8 @@
     "morgan": "~1.9.0"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^5.2.0",
+    "jest": "^24.1.0",
+    "jest-extended": "^0.11.1",
     "supertest": "^3.4.2"
   }
 }

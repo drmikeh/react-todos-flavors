@@ -1,4 +1,4 @@
-const expect = require('chai').expect;
+require('jest-extended');
 const supertest = require('supertest');
 const TodosErrors = require('../models/TodosErrors');
 
@@ -53,11 +53,11 @@ mutation destroyTodo($id: Int!) {
 `;
 
 let server;
-before(next => {
+beforeAll(next => {
     server = require('../server');
     next();
 });
-after(next => {
+afterAll(next => {
     server.close();
     next();
 });
@@ -72,12 +72,12 @@ describe('Todo Queries', () => {
                 .expect(200)
                 .then(res => {
                     const todos = res.body.data.todos;
-                    expect(todos).to.not.equal(null);
-                    expect(todos).to.be.instanceof(Array);
-                    expect(todos.length).to.equal(3);
-                    expect(todos[1]).to.have.property('title').that.equals('Learn Redux');
+                    expect(todos).not.toBeNull();
+                    expect(todos).toBeArray();
+                    expect(todos.length).toEqual(3);
+                    expect(todos[1]).toHaveProperty('title', 'Learn Redux');
                     todos.forEach(todo => {
-                        expect(todo).to.have.property('title');
+                        expect(todo).toHaveProperty('title');
                     });
                     done();
                 })
@@ -102,7 +102,7 @@ describe('Todo Queries', () => {
                 .expect(500)
                 .then(res => {
                     const error = res.body.errors[0].message;
-                    expect(error).to.equal(TodosErrors.notFound.message);
+                    expect(error).toEqual(TodosErrors.notFound.message);
                     done();
                 })
                 .catch(err => {
@@ -123,9 +123,9 @@ describe('Todo Queries', () => {
                 .expect(200)
                 .then(res => {
                     const todo = res.body.data.todo;
-                    expect(todo).to.not.equal(null);
-                    expect(todo).to.have.property('title').that.equals('Learn Redux');
-                    expect(todo).to.have.property('completed').that.equals(true);
+                    expect(todo).not.toBeNull();
+                    expect(todo).toHaveProperty('title', 'Learn Redux');
+                    expect(todo).toHaveProperty('completed', true);
                     done();
                 })
                 .catch(err => {
@@ -148,7 +148,7 @@ describe('Todo Mutations', () => {
                 .expect(500)
                 .then(res => {
                     const error = res.body.errors[0].message;
-                    expect(error).to.equal(TodosErrors.invalidTitle.message);
+                    expect(error).toEqual(TodosErrors.invalidTitle.message);
                     done();
                 })
                 .catch(err => {
@@ -171,9 +171,9 @@ describe('Todo Mutations', () => {
                 .expect(200)
                 .then(res => {
                     const todo = res.body.data.createTodo;
-                    expect(todo).to.not.equal(null);
-                    expect(todo).to.have.property('title').that.equals('Learn TDD');
-                    expect(todo).to.have.property('completed').that.equals(false);
+                    expect(todo).not.toBeNull();
+                    expect(todo).toHaveProperty('title', 'Learn TDD');
+                    expect(todo).toHaveProperty('completed', false);
                     done();
                 })
                 .catch(err => {
@@ -197,9 +197,9 @@ describe('Todo Mutations', () => {
                 .expect(200)
                 .then(res => {
                     const todo = res.body.data.createTodo;
-                    expect(todo).to.not.equal(null);
-                    expect(todo).to.have.property('title').that.equals('Learn TDD');
-                    expect(todo).to.have.property('completed').that.equals(true);
+                    expect(todo).not.toBeNull();
+                    expect(todo).toHaveProperty('title', 'Learn TDD');
+                    expect(todo).toHaveProperty('completed', true);
                     done();
                 })
                 .catch(err => {
@@ -227,7 +227,7 @@ describe('Todo Mutations', () => {
                 .expect(500)
                 .then(res => {
                     const error = res.body.errors[0].message;
-                    expect(error).to.equal(TodosErrors.notFound.message);
+                    expect(error).toEqual(TodosErrors.notFound.message);
                     done();
                 })
                 .catch(err => {
@@ -251,7 +251,7 @@ describe('Todo Mutations', () => {
                 .expect(500)
                 .then(res => {
                     const error = res.body.errors[0].message;
-                    expect(error).to.equal(TodosErrors.invalidTitle.message);
+                    expect(error).toEqual(TodosErrors.invalidTitle.message);
                     done();
                 })
                 .catch(err => {
@@ -276,9 +276,9 @@ describe('Todo Mutations', () => {
                 .expect(200)
                 .then(res => {
                     const todo = res.body.data.updateTodo;
-                    expect(todo).to.not.equal(null);
-                    expect(todo).to.have.property('title').that.equals('Learn go');
-                    expect(todo).to.have.property('completed').that.equals(true);
+                    expect(todo).not.toBeNull();
+                    expect(todo).toHaveProperty('title', 'Learn go');
+                    expect(todo).toHaveProperty('completed', true);
                     done();
                 })
                 .catch(err => {
@@ -302,7 +302,7 @@ describe('Todo Mutations', () => {
                 .expect(500)
                 .then(res => {
                     const error = res.body.errors[0].message;
-                    expect(error).to.equal(TodosErrors.notFound.message);
+                    expect(error).toEqual(TodosErrors.notFound.message);
                     done();
                 })
                 .catch(err => {
@@ -323,9 +323,9 @@ describe('Todo Mutations', () => {
                 .expect(200)
                 .then(res => {
                     const todo = res.body.data.destroyTodo;
-                    expect(todo).to.not.equal(null);
-                    expect(todo).to.have.property('title').that.equals('Learn go');
-                    expect(todo).to.have.property('completed').that.equals(true);
+                    expect(todo).not.toBeNull();
+                    expect(todo).toHaveProperty('title', 'Learn go');
+                    expect(todo).toHaveProperty('completed', true);
                     done();
                 })
                 .catch(err => {
