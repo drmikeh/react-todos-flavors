@@ -10,5 +10,12 @@
     "video": false,
     "env": {
         "serverUrl": "/api/todos"
+    },
+    "reporter2": "mochawesome",
+    "reporterOptions2": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
     }
 }

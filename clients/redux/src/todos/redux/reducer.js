@@ -31,7 +31,7 @@ export default function todosReducer(state = [], action) {
     }
 }
 
-export const getTodosToShow = (todos, filter) => {
+export const filterTodos = (todos, filter) => {
     return todos.filter(todo => {
         switch (filter) {
             case ALL_TODOS:

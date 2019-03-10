@@ -7,18 +7,18 @@ import TodoList from './TodoList';
 import TodoFooter from './TodoFooter';
 import { ALL_TODOS } from '../redux/filters';
 
-import { getTodosToShow } from '../redux/reducer';
+import { filterTodos } from '../redux/reducer';
 import { addTodo, saveTodo, deleteTodo, deleteCompleted } from '../redux/actions';
 import 'font-awesome/css/font-awesome.min.css';
 import 'todomvc-common/base.css';
 import 'todomvc-app-css/index.css';
 
 class TodoApp extends Component {
-    onUpdateText(id, text) {
+    onUpdateTitle(id, title) {
         const foundTodo = this.props.todos.find(todo => todo.id === id);
         const updatedTodo = {
             ...foundTodo,
-            text,
+            title,
         };
         this.props.onSave(updatedTodo);
     }
@@ -48,14 +48,14 @@ class TodoApp extends Component {
                     <main className="main">
                         <Route path="/:filter?" render={props => {
                             const filter = props.match.params.filter || ALL_TODOS;
-                            const todosToShow = getTodosToShow(todos, filter);
+                            const todosToShow = filterTodos(todos, filter);
                             return (
                                 <TodoList
                                     {...props}
                                     todos={todosToShow}
                                     toggle={this.onToggleCompleted.bind(this)}
                                     remove={this.props.onDelete}
-                                    save={this.onUpdateText.bind(this)}
+                                    save={this.onUpdateTitle.bind(this)}
                                 />
                             );
                         }}/>
@@ -88,8 +88,8 @@ const mapStateToProps = state => {
 /*
 const mapDispatchToProps = (dispatch, containerProps) => {
   return {
-    onAdd: text => {
-        dispatch(addTodo(text));
+    onAdd: title => {
+        dispatch(addTodo(title));
     },
     onSave: todo => {
         dispatch(saveTodo(todo));

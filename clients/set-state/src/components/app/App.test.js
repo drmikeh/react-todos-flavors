@@ -16,8 +16,7 @@ async function mountApp() {
     return promise;
 }
 
-const DELAY_MILLIS = 100;
-const asyncFlush = (delay = DELAY_MILLIS) => new Promise(resolve => setTimeout(resolve, delay));
+const asyncFlush = (delay = 100) => new Promise(resolve => setTimeout(resolve, delay));
 
 let wrapper = null;
 

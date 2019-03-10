@@ -33,7 +33,8 @@
     "ci-test": "concurrently --success first -k \"NODE_ENV=test PORT=3002 node ../../servers/rest/bin/www\" \"yarn ci-test-helper\"",
     "cypress": "cypress open",
     "cypress:run": "cypress run",
-    "cypress:cicd": "start-server-and-test start http-get://localhost:3000 cypress:run"
+    "cypress:cicd2": "start-server-and-test start http-get://localhost:3000 cypress:run",
+    "cypress:cicd": "yarn cypress:run"
   },
   "eslintConfig": {
     "extends": "react-app"

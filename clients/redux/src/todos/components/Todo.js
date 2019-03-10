@@ -15,14 +15,14 @@ class Todo extends React.Component {
         super(props);
         this.state = {
             editing: false,
-            editText: this.props.todo.text,
+            editTitle: this.props.todo.title,
         };
         this.editInputRef = React.createRef();  // the ref is used to grab focus
     }
 
     onEdit = () => {
         this.setState({
-            editText: this.props.todo.text,
+            editTitle: this.props.todo.title,
             editing: true,
         }, () => {
             this.editInputRef.current.focus();
@@ -30,12 +30,12 @@ class Todo extends React.Component {
     }
 
     onSave = (event) => {
-        const text = this.state.editText.trim();
-        if (text) {
-            this.props.save(this.props.todo.id, text);
+        const title = this.state.editTitle.trim();
+        if (title) {
+            this.props.save(this.props.todo.id, title);
             this.setState({
                 editing: false,
-                editText: text,
+                editTitle: title,
             });
         } else {
             this.props.onDestroy();
@@ -45,7 +45,7 @@ class Todo extends React.Component {
     onKeyDown = (event) => {
         if (event.which === ESCAPE_KEY) {
             this.setState({
-                editText: this.props.todo.text,
+                editTitle: this.props.todo.title,
                 editing: false
             });
         } else if (event.which === ENTER_KEY) {
@@ -55,13 +55,13 @@ class Todo extends React.Component {
 
     onChange = (event) => {
         if (this.state.editing) {
-            this.setState({editText: event.target.value});
+            this.setState({editTitle: event.target.value});
         }
     }
 
     render() {
         const { todo, toggle, remove } = this.props;
-        const { editing, editText } = this.state;
+        const { editing, editTitle } = this.state;
 
         return (
             <li className={classNames({
@@ -75,14 +75,14 @@ class Todo extends React.Component {
                         checked={todo.completed}
                         onChange={() => {toggle(todo.id)}}
                     />
-                    <label onDoubleClick={this.onEdit}>{editText}</label>
+                    <label onDoubleClick={this.onEdit}>{editTitle}</label>
                     <button className="destroy" onClick={() => {remove(todo.id)}} />
                 </div>
                 <input
                     ref={this.editInputRef}
                     type="text"
                     className="edit"
-                    value={this.state.editText}
+                    value={this.state.editTitle}
                     onBlur={this.onSave}
                     onChange={this.onChange}
                     onKeyDown={this.onKeyDown}

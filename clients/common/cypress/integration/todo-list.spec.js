@@ -22,7 +22,7 @@ describe('List items', () => {
             url: `${Cypress.env('serverUrl')}/1`,
             method: 'DELETE',
             status: 200,
-            response: {}
+            response: { id: 1 }
         })
         cy.get('.todo-list li')
             .first()

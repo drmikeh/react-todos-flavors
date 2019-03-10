@@ -21,6 +21,10 @@
     "cypress": "^3.1.5",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
+    "mocha": "^6.0.2",
+    "mochawesome": "^3.1.1",
+    "mochawesome-merge": "^1.0.7",
+    "mochawesome-report-generator": "^3.1.5",
     "start-server-and-test": "^1.7.11"
   },
   "scripts": {
@@ -32,7 +36,10 @@
     "ci-test": "concurrently --success first -k \"NODE_ENV=test PORT=3002 node ../../servers/rest/bin/www\" \"yarn ci-test-helper\"",
     "cypress": "cypress open",
     "cypress:run": "cypress run",
-    "cypress:cicd": "start-server-and-test start http-get://localhost:3000 cypress:run"
+    "cypress:cicd2": "start-server-and-test start http-get://localhost:3000 cypress:run",
+    "cypress:cicd": "yarn cypress:run",
+    "cypress:merge": "npx mochawesome-merge --reportDir cypress/results > mochawesome.json",
+    "cypress:gen-report": "npx mochawesome-report-generator mochawesome.json"
   },
   "eslintConfig": {
     "extends": "react-app"
