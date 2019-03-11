@@ -36,7 +36,7 @@ class TodoApp extends Component {
                                     todos={todosToShow}
                                     toggle={this.props.todoState.toggleCompleted}
                                     remove={this.props.todoState.removeTodo}
-                                    save={this.props.todoState.updateText}
+                                    save={this.props.todoState.updateTitle}
                                 />
                             );
                         }}/>

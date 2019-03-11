@@ -8,7 +8,7 @@ const ENTER_KEY = 13;
 
 const Todo = ({ todo, toggle, save, remove }) => {
     let editing = false;
-    let editText = todo.text;
+    let editTitle = todo.title;
     let editInputRef = React.createRef();
 
     autorun(() => {
@@ -16,26 +16,26 @@ const Todo = ({ todo, toggle, save, remove }) => {
     });
     
     function onEdit() {
-        editText = todo.text;
+        editTitle = todo.title;
         editing = true;
-        console.log('onEdit:', editText, editing ? 'YES' : 'NO');
+        console.log('onEdit:', editTitle, editing ? 'YES' : 'NO');
         editInputRef.current.focus();
     }
 
     when(() => editing, () => editInputRef.current.focus());
 
     function onSave(event) {
-        const text = editText.trim();
-        if (text) {
-            save(todo.id, text);
+        const title = editTitle.trim();
+        if (title) {
+            save(todo.id, title);
             editing = false;
-            editText = text;
+            editTitle = title;
         }
     }
 
     function onKeyDown(event) {
         if (event.which === ESCAPE_KEY) {
-            editText = todo.text;
+            editTitle = todo.title;
             editing = false;
         } else if (event.which === ENTER_KEY) {
             onSave(event);
@@ -44,11 +44,11 @@ const Todo = ({ todo, toggle, save, remove }) => {
 
     function onChange(event) {
         if (editing) {
-            editText = event.target.value;
+            editTitle = event.target.value;
         }
     }
 
-    console.log(editText, editing);
+    console.log(editTitle, editing);
     return (
         <li className={classNames({
             completed: todo.completed,
@@ -61,14 +61,14 @@ const Todo = ({ todo, toggle, save, remove }) => {
                     checked={todo.completed}
                     onChange={() => {toggle(todo.id)}}
                 />
-                <label onDoubleClick={onEdit}>{editText} - {editing ? 'YES' : 'NO'}</label>
+                <label onDoubleClick={onEdit}>{editTitle} - {editing ? 'YES' : 'NO'}</label>
                 <button className="destroy" onClick={() => {remove(todo.id)}} />
             </div>
             <input
                 ref={editInputRef}
                 type="text"
                 className="edit"
-                value={editText}
+                value={editTitle}
                 onBlur={onSave}
                 onChange={onChange}
                 onKeyDown={onKeyDown}
@@ -79,7 +79,7 @@ const Todo = ({ todo, toggle, save, remove }) => {
 
 decorate(Todo, {
     editing: observable,
-    editText: observable,
+    editTitle: observable,
     onEdit: action,
     onSave: action,
     onKeyDown: action,

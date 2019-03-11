@@ -1,10 +1,8 @@
 import { action, observable } from 'mobx';
-import axios from 'axios';
+import TodoService from '../services/TodoService';
 import toastr from '../toastr';
 import 'toastr/build/toastr.min.css';
 import { ACTIVE_TODOS, COMPLETED_TODOS } from './TodoViewStates';
-
-const apiUrl = 'https://59b3446095ddb9001143e95f.mockapi.io/api/todos'
 
 const todoState = observable({
     todos: []
@@ -13,7 +11,7 @@ const todoState = observable({
 todoState.fetchTodos = action(function fetchTodos() {
     (async () => {
         try {
-            const response = await axios.get(apiUrl);
+            const response = await TodoService.get();
             todoState.setTodos(response.data);
         } catch (error) {
             toastr.error(error);
@@ -41,10 +39,10 @@ todoState.setTodos = action(function setTodos(todos) {
 todoState.addTodo = async (val) => {
     try {
         const todo = {
-            text: val,
+            title: val,
             completed: false
         };
-        const response = await axios.post(apiUrl, todo);
+        const response = await TodoService.post(todo);
         todoState.todos.push(response.data);
     } catch (error) {
         toastr.error(error);
@@ -55,7 +53,7 @@ todoState.removeTodo = async (id) => {
     try {
         // Filter all todos except the one to be removed
         todoState.setTodos(todoState.todos.filter(todo => todo.id !== id));
-        await axios.delete(apiUrl + '/' + id);
+        await TodoService.delete(id);
     } catch (error) {
         toastr.error(error);
     };
@@ -63,7 +61,7 @@ todoState.removeTodo = async (id) => {
 
 todoState.saveTodo = async (todo) => {
     try {
-        const response = await axios.put(apiUrl + '/' + todo.id, todo);
+        const response = await TodoService.put(todo);
         const updatedTodoFromServer = response.data;
         todoState.setTodos(todoState.todos.map(todo => (
             todo.id !== updatedTodoFromServer.id ? todo : updatedTodoFromServer
@@ -73,11 +71,11 @@ todoState.saveTodo = async (todo) => {
     };
 }
 
-todoState.updateText = (id, text) => {
+todoState.updateTitle = (id, title) => {
     const foundTodo = todoState.todos.find(todo => todo.id === id);
     const updatedTodo = {
         ...foundTodo,
-        text,
+        title,
     };
     todoState.saveTodo(updatedTodo);
 }
@@ -95,7 +93,7 @@ todoState.clearCompleted = () => {
     // Filter all todos except the ones to be removed
     const keepers = todoState.todos.filter(todo => !todo.completed);
     const losers = todoState.todos.filter(todo => todo.completed);
-    const promises = losers.map(todo => axios.delete(apiUrl + '/' + todo.id));
+    const promises = losers.map(todo => TodoService.delete(todo.id));
     Promise.all(promises)
         .then(responses => {
             todoState.setTodos(keepers);

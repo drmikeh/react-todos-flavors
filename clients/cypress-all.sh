@@ -6,7 +6,9 @@ declare -a clients=(
     "hooks"
     "hooks-crud-hook"
     "hooks-crud-hook-fade"
-    "redux"
+    "redux",
+    "mobx",
+    "mobx-decorators"
 )
 
 for client in "${clients[@]}"

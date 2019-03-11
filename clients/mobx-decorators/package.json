@@ -2,6 +2,7 @@
   "name": "mobx-decorators",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3002/",
   "dependencies": {
     "@babel/core": "7.1.0",
     "@babel/plugin-proposal-class-properties": "^7.2.1",
@@ -69,7 +70,15 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "ci-test-helper": "CI=true react-scripts test",
+    "ci-test": "concurrently --success first -k \"NODE_ENV=test PORT=3002 node ../../servers/rest/bin/www\" \"yarn ci-test-helper\"",
+    "cypress": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:cicd": "start-server-and-test start http-get://localhost:3000 cypress:run",
+    "cypress:cicd2": "yarn cypress:run",
+    "cypress:merge": "npx mochawesome-merge --reportDir cypress/results > mochawesome.json",
+    "cypress:gen-report": "npx mochawesome-report-generator mochawesome.json"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -139,5 +148,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^3.1.5"
   }
 }
