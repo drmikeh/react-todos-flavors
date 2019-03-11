@@ -1,7 +1,29 @@
 === set-state ===
 yarn run v1.13.0
-$ yarn cypress:run
-$ cypress run
+$ start-server-and-test start http-get://localhost:3000 cypress:run
+starting server using command "npm run start"
+and when url "http-get://localhost:3000" is responding
+running tests using command "cypress:run"
+
+> set-state@0.1.0 start /Users/mah3093/playground/2019/react/react-todo-flavors/clients/set-state
+> react-scripts start
+
+Starting the development server...
+
+Compiled successfully!
+
+You can now view set-state in the browser.
+
+  Local:            http://localhost:3000/
+  On Your Network:  http://172.19.72.16:3000/
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+
+
+> set-state@0.1.0 cypress:run /Users/mah3093/playground/2019/react/react-todo-flavors/clients/set-state
+> cypress run
+
 
 ====================================================================================================
 
@@ -20,195 +42,8 @@ $ cypress run
 
 
   App initialization
-    ✓ Loads todos on page load (565ms)
-    ✓ Displays an error on failure (267ms)
-
-
-  2 passing (861ms)
-
-
-  (Results)
-
-  ┌────────────────────────────────┐
-  │ Tests:        2                │
-  │ Passing:      2                │
-  │ Failing:      0                │
-  │ Pending:      0                │
-  │ Skipped:      0                │
-  │ Screenshots:  0                │
-  │ Video:        false            │
-  │ Duration:     0 seconds        │
-  │ Spec Ran:     app-init.spec.js │
-  └────────────────────────────────┘
-
-
-────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                                                    
-  Running: footer.spec.js...                                                               (2 of 5) 
-
-
-  Footer
-    with a single todo
-      ✓ displays a singular todo in count (630ms)
-    with multiple todos
-      ✓ displays plural todos in count (326ms)
-      ✓ Handles filter links (436ms)
-
-
-  3 passing (1s)
-
-
-  (Results)
-
-  ┌──────────────────────────────┐
-  │ Tests:        3              │
-  │ Passing:      3              │
-  │ Failing:      0              │
-  │ Pending:      0              │
-  │ Skipped:      0              │
-  │ Screenshots:  0              │
-  │ Video:        false          │
-  │ Duration:     1 second       │
-  │ Spec Ran:     footer.spec.js │
-  └──────────────────────────────┘
-
-
-────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                                                    
-  Running: smoke-tests.spec.js...                                                          (3 of 5) 
-
-
-  Smoke tests
-    With no todos
-      ✓ Saves new todos (1485ms)
-    With active todos
-      ✓ Loads existing data from the DB (400ms)
-      ✓ Deletes todos (660ms)
-      ✓ Toggles todos (936ms)
-
-
-  4 passing (4s)
-
-
-  (Results)
-
-  ┌───────────────────────────────────┐
-  │ Tests:        4                   │
-  │ Passing:      4                   │
-  │ Failing:      0                   │
-  │ Pending:      0                   │
-  │ Skipped:      0                   │
-  │ Screenshots:  0                   │
-  │ Video:        false               │
-  │ Duration:     3 seconds           │
-  │ Spec Ran:     smoke-tests.spec.js │
-  └───────────────────────────────────┘
-
-
-────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                                                    
-  Running: todo-form.spec.js...                                                            (4 of 5) 
-
-
-  Todo Form
-    ✓ focuses input on load (647ms)
-    ✓ accepts input (492ms)
-    Form submission
-      ✓ Adds a new todo on submit (593ms)
-
-
-  3 passing (2s)
-
-
-  (Results)
-
-  ┌─────────────────────────────────┐
-  │ Tests:        3                 │
-  │ Passing:      3                 │
-  │ Failing:      0                 │
-  │ Pending:      0                 │
-  │ Skipped:      0                 │
-  │ Screenshots:  0                 │
-  │ Video:        false             │
-  │ Duration:     1 second          │
-  │ Spec Ran:     todo-form.spec.js │
-  └─────────────────────────────────┘
-
-
-────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                                                    
-  Running: todo-list.spec.js...                                                            (5 of 5) 
-
-
-  List items
-    ✓ Properly displays completed items (685ms)
-    ✓ Shows remaining todos in the footer (285ms)
-    ✓ Removes a todo (248ms)
-    ✓ Marks an incomplete item as complete (259ms)
-
-
-  4 passing (2s)
-
-
-  (Results)
-
-  ┌─────────────────────────────────┐
-  │ Tests:        4                 │
-  │ Passing:      4                 │
-  │ Failing:      0                 │
-  │ Pending:      0                 │
-  │ Skipped:      0                 │
-  │ Screenshots:  0                 │
-  │ Video:        false             │
-  │ Duration:     1 second          │
-  │ Spec Ran:     todo-list.spec.js │
-  └─────────────────────────────────┘
-
-
-====================================================================================================
-
-  (Run Finished)
-
-
-      Spec                                                Tests  Passing  Failing  Pending  Skipped 
-  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ ✔ app-init.spec.js                          859ms        2        2        -        -        - │
-  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔ footer.spec.js                            00:01        3        3        -        -        - │
-  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔ smoke-tests.spec.js                       00:03        4        4        -        -        - │
-  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔ todo-form.spec.js                         00:01        3        3        -        -        - │
-  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔ todo-list.spec.js                         00:01        4        4        -        -        - │
-  └────────────────────────────────────────────────────────────────────────────────────────────────┘
-    All specs passed!                           00:09       16       16        -        -        -  
-
-Done in 25.15s.
-=== unstated ===
-yarn run v1.13.0
-$ yarn cypress:run
-$ cypress run
-
-====================================================================================================
-
-  (Run Starting)
-
-  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ Cypress:    3.1.5                                                                              │
-  │ Browser:    Electron 59 (headless)                                                             │
-  │ Specs:      5 found (app-init.spec.js, footer.spec.js, smoke-tests.spec.js, todo-form.spec.js… │
-  └────────────────────────────────────────────────────────────────────────────────────────────────┘
-
-
-────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                                                    
-  Running: app-init.spec.js...                                                             (1 of 5) 
-
-
-  App initialization
-    ✓ Loads todos on page load (601ms)
-    ✓ Displays an error on failure (336ms)
+    ✓ Loads todos on page load (592ms)
+    ✓ Displays an error on failure (341ms)
 
 
   2 passing (1s)
@@ -236,13 +71,13 @@ $ cypress run
 
   Footer
     with a single todo
-      ✓ displays a singular todo in count (639ms)
+      ✓ displays a singular todo in count (652ms)
     with multiple todos
-      ✓ displays plural todos in count (307ms)
-      ✓ Handles filter links (448ms)
+      ✓ displays plural todos in count (368ms)
+      ✓ Handles filter links (487ms)
 
 
-  3 passing (1s)
+  3 passing (2s)
 
 
   (Results)
@@ -267,11 +102,11 @@ $ cypress run
 
   Smoke tests
     With no todos
-      ✓ Saves new todos (1587ms)
+      ✓ Saves new todos (1541ms)
     With active todos
-      ✓ Loads existing data from the DB (593ms)
-      ✓ Deletes todos (675ms)
-      ✓ Toggles todos (965ms)
+      ✓ Loads existing data from the DB (539ms)
+      ✓ Deletes todos (768ms)
+      ✓ Toggles todos (988ms)
 
 
   4 passing (4s)
@@ -298,10 +133,10 @@ $ cypress run
 
 
   Todo Form
-    ✓ focuses input on load (640ms)
-    ✓ accepts input (443ms)
+    ✓ focuses input on load (645ms)
+    ✓ accepts input (498ms)
     Form submission
-      ✓ Adds a new todo on submit (591ms)
+      ✓ Adds a new todo on submit (623ms)
 
 
   3 passing (2s)
@@ -328,10 +163,10 @@ $ cypress run
 
 
   List items
-    ✓ Properly displays completed items (700ms)
-    ✓ Shows remaining todos in the footer (269ms)
-    ✓ Removes a todo (254ms)
-    ✓ Marks an incomplete item as complete (230ms)
+    ✓ Properly displays completed items (714ms)
+    ✓ Shows remaining todos in the footer (311ms)
+    ✓ Removes a todo (291ms)
+    ✓ Marks an incomplete item as complete (269ms)
 
 
   4 passing (2s)
@@ -359,7 +194,7 @@ $ cypress run
 
       Spec                                                Tests  Passing  Failing  Pending  Skipped 
   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ ✔ app-init.spec.js                          970ms        2        2        -        -        - │
+  │ ✔ app-init.spec.js                          986ms        2        2        -        -        - │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
   │ ✔ footer.spec.js                            00:01        3        3        -        -        - │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
@@ -371,11 +206,242 @@ $ cypress run
   └────────────────────────────────────────────────────────────────────────────────────────────────┘
     All specs passed!                           00:09       16       16        -        -        -  
 
-Done in 22.91s.
+Done in 36.48s.
+=== unstated ===
+yarn run v1.13.0
+$ start-server-and-test start http-get://localhost:3000 cypress:run
+starting server using command "npm run start"
+and when url "http-get://localhost:3000" is responding
+running tests using command "cypress:run"
+
+> set-state@0.1.0 start /Users/mah3093/playground/2019/react/react-todo-flavors/clients/unstated
+> react-scripts start
+
+Starting the development server...
+
+Compiled successfully!
+
+You can now view set-state in the browser.
+
+  Local:            http://localhost:3000/
+  On Your Network:  http://172.19.72.16:3000/
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+
+
+> set-state@0.1.0 cypress:run /Users/mah3093/playground/2019/react/react-todo-flavors/clients/unstated
+> cypress run
+
+
+====================================================================================================
+
+  (Run Starting)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Cypress:    3.1.5                                                                              │
+  │ Browser:    Electron 59 (headless)                                                             │
+  │ Specs:      5 found (app-init.spec.js, footer.spec.js, smoke-tests.spec.js, todo-form.spec.js… │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running: app-init.spec.js...                                                             (1 of 5) 
+
+
+  App initialization
+    ✓ Loads todos on page load (624ms)
+    ✓ Displays an error on failure (300ms)
+
+
+  2 passing (973ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────┐
+  │ Tests:        2                │
+  │ Passing:      2                │
+  │ Failing:      0                │
+  │ Pending:      0                │
+  │ Skipped:      0                │
+  │ Screenshots:  0                │
+  │ Video:        false            │
+  │ Duration:     0 seconds        │
+  │ Spec Ran:     app-init.spec.js │
+  └────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running: footer.spec.js...                                                               (2 of 5) 
+
+
+  Footer
+    with a single todo
+      ✓ displays a singular todo in count (649ms)
+    with multiple todos
+      ✓ displays plural todos in count (390ms)
+      ✓ Handles filter links (486ms)
+
+
+  3 passing (2s)
+
+
+  (Results)
+
+  ┌──────────────────────────────┐
+  │ Tests:        3              │
+  │ Passing:      3              │
+  │ Failing:      0              │
+  │ Pending:      0              │
+  │ Skipped:      0              │
+  │ Screenshots:  0              │
+  │ Video:        false          │
+  │ Duration:     1 second       │
+  │ Spec Ran:     footer.spec.js │
+  └──────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running: smoke-tests.spec.js...                                                          (3 of 5) 
+
+
+  Smoke tests
+    With no todos
+      ✓ Saves new todos (1437ms)
+    With active todos
+      ✓ Loads existing data from the DB (525ms)
+      ✓ Deletes todos (710ms)
+      ✓ Toggles todos (984ms)
+
+
+  4 passing (4s)
+
+
+  (Results)
+
+  ┌───────────────────────────────────┐
+  │ Tests:        4                   │
+  │ Passing:      4                   │
+  │ Failing:      0                   │
+  │ Pending:      0                   │
+  │ Skipped:      0                   │
+  │ Screenshots:  0                   │
+  │ Video:        false               │
+  │ Duration:     3 seconds           │
+  │ Spec Ran:     smoke-tests.spec.js │
+  └───────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running: todo-form.spec.js...                                                            (4 of 5) 
+
+
+  Todo Form
+    ✓ focuses input on load (610ms)
+    ✓ accepts input (489ms)
+    Form submission
+      ✓ Adds a new todo on submit (632ms)
+
+
+  3 passing (2s)
+
+
+  (Results)
+
+  ┌─────────────────────────────────┐
+  │ Tests:        3                 │
+  │ Passing:      3                 │
+  │ Failing:      0                 │
+  │ Pending:      0                 │
+  │ Skipped:      0                 │
+  │ Screenshots:  0                 │
+  │ Video:        false             │
+  │ Duration:     1 second          │
+  │ Spec Ran:     todo-form.spec.js │
+  └─────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running: todo-list.spec.js...                                                            (5 of 5) 
+
+
+  List items
+    ✓ Properly displays completed items (660ms)
+    ✓ Shows remaining todos in the footer (306ms)
+    ✓ Removes a todo (289ms)
+    ✓ Marks an incomplete item as complete (256ms)
+
+
+  4 passing (2s)
+
+
+  (Results)
+
+  ┌─────────────────────────────────┐
+  │ Tests:        4                 │
+  │ Passing:      4                 │
+  │ Failing:      0                 │
+  │ Pending:      0                 │
+  │ Skipped:      0                 │
+  │ Screenshots:  0                 │
+  │ Video:        false             │
+  │ Duration:     1 second          │
+  │ Spec Ran:     todo-list.spec.js │
+  └─────────────────────────────────┘
+
+
+====================================================================================================
+
+  (Run Finished)
+
+
+      Spec                                                Tests  Passing  Failing  Pending  Skipped 
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ ✔ app-init.spec.js                          967ms        2        2        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔ footer.spec.js                            00:01        3        3        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔ smoke-tests.spec.js                       00:03        4        4        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔ todo-form.spec.js                         00:01        3        3        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔ todo-list.spec.js                         00:01        4        4        -        -        - │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    All specs passed!                           00:09       16       16        -        -        -  
+
+Done in 36.06s.
 === hooks ===
 yarn run v1.13.0
-$ yarn cypress:run
-$ cypress run
+$ start-server-and-test start http-get://localhost:3000 cypress:run
+starting server using command "npm run start"
+and when url "http-get://localhost:3000" is responding
+running tests using command "cypress:run"
+
+> hooks@0.1.0 start /Users/mah3093/playground/2019/react/react-todo-flavors/clients/hooks
+> react-scripts start
+
+Starting the development server...
+
+Compiled successfully!
+
+You can now view hooks in the browser.
+
+  Local:            http://localhost:3000/
+  On Your Network:  http://172.19.72.16:3000/
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+
+
+> hooks@0.1.0 cypress:run /Users/mah3093/playground/2019/react/react-todo-flavors/clients/hooks
+> cypress run
+
 
 ====================================================================================================
 
@@ -395,7 +461,7 @@ $ cypress run
 
   App initialization
     ✓ Loads todos on page load (637ms)
-    ✓ Displays an error on failure (336ms)
+    ✓ Displays an error on failure (333ms)
 
 
   2 passing (1s)
@@ -423,13 +489,13 @@ $ cypress run
 
   Footer
     with a single todo
-      ✓ displays a singular todo in count (625ms)
+      ✓ displays a singular todo in count (651ms)
     with multiple todos
-      ✓ displays plural todos in count (307ms)
-      ✓ Handles filter links (451ms)
+      ✓ displays plural todos in count (375ms)
+      ✓ Handles filter links (460ms)
 
 
-  3 passing (1s)
+  3 passing (2s)
 
 
   (Results)
@@ -454,11 +520,11 @@ $ cypress run
 
   Smoke tests
     With no todos
-      ✓ Saves new todos (1480ms)
+      ✓ Saves new todos (1492ms)
     With active todos
-      ✓ Loads existing data from the DB (535ms)
-      ✓ Deletes todos (779ms)
-      ✓ Toggles todos (1017ms)
+      ✓ Loads existing data from the DB (514ms)
+      ✓ Deletes todos (696ms)
+      ✓ Toggles todos (983ms)
 
 
   4 passing (4s)
@@ -485,10 +551,10 @@ $ cypress run
 
 
   Todo Form
-    ✓ focuses input on load (595ms)
-    ✓ accepts input (536ms)
+    ✓ focuses input on load (697ms)
+    ✓ accepts input (506ms)
     Form submission
-      ✓ Adds a new todo on submit (605ms)
+      ✓ Adds a new todo on submit (608ms)
 
 
   3 passing (2s)
@@ -515,10 +581,10 @@ $ cypress run
 
 
   List items
-    ✓ Properly displays completed items (791ms)
-    ✓ Shows remaining todos in the footer (322ms)
-    ✓ Removes a todo (265ms)
-    ✓ Marks an incomplete item as complete (266ms)
+    ✓ Properly displays completed items (642ms)
+    ✓ Shows remaining todos in the footer (323ms)
+    ✓ Removes a todo (272ms)
+    ✓ Marks an incomplete item as complete (270ms)
 
 
   4 passing (2s)
@@ -558,11 +624,33 @@ $ cypress run
   └────────────────────────────────────────────────────────────────────────────────────────────────┘
     All specs passed!                           00:09       16       16        -        -        -  
 
-Done in 23.64s.
+Done in 35.70s.
 === hooks-crud-hook ===
 yarn run v1.13.0
-$ yarn cypress:run
-$ cypress run
+$ start-server-and-test start http-get://localhost:3000 cypress:run
+starting server using command "npm run start"
+and when url "http-get://localhost:3000" is responding
+running tests using command "cypress:run"
+
+> hooks-crud-hook@0.1.0 start /Users/mah3093/playground/2019/react/react-todo-flavors/clients/hooks-crud-hook
+> react-scripts start
+
+Starting the development server...
+
+Compiled successfully!
+
+You can now view hooks-crud-hook in the browser.
+
+  Local:            http://localhost:3000/
+  On Your Network:  http://172.19.72.16:3000/
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+
+
+> hooks-crud-hook@0.1.0 cypress:run /Users/mah3093/playground/2019/react/react-todo-flavors/clients/hooks-crud-hook
+> cypress run
+
 
 ====================================================================================================
 
@@ -581,8 +669,8 @@ $ cypress run
 
 
   App initialization
-    ✓ Loads todos on page load (657ms)
-    ✓ Displays an error on failure (377ms)
+    ✓ Loads todos on page load (675ms)
+    ✓ Displays an error on failure (371ms)
 
 
   2 passing (1s)
@@ -610,10 +698,10 @@ $ cypress run
 
   Footer
     with a single todo
-      ✓ displays a singular todo in count (640ms)
+      ✓ displays a singular todo in count (656ms)
     with multiple todos
-      ✓ displays plural todos in count (357ms)
-      ✓ Handles filter links (465ms)
+      ✓ displays plural todos in count (369ms)
+      ✓ Handles filter links (515ms)
 
 
   3 passing (2s)
@@ -641,11 +729,11 @@ $ cypress run
 
   Smoke tests
     With no todos
-      ✓ Saves new todos (1417ms)
+      ✓ Saves new todos (1525ms)
     With active todos
-      ✓ Loads existing data from the DB (453ms)
-      ✓ Deletes todos (683ms)
-      ✓ Toggles todos (927ms)
+      ✓ Loads existing data from the DB (587ms)
+      ✓ Deletes todos (732ms)
+      ✓ Toggles todos (990ms)
 
 
   4 passing (4s)
@@ -672,10 +760,10 @@ $ cypress run
 
 
   Todo Form
-    ✓ focuses input on load (621ms)
-    ✓ accepts input (473ms)
+    ✓ focuses input on load (669ms)
+    ✓ accepts input (516ms)
     Form submission
-      ✓ Adds a new todo on submit (580ms)
+      ✓ Adds a new todo on submit (643ms)
 
 
   3 passing (2s)
@@ -702,10 +790,10 @@ $ cypress run
 
 
   List items
-    ✓ Properly displays completed items (688ms)
-    ✓ Shows remaining todos in the footer (276ms)
-    ✓ Removes a todo (282ms)
-    ✓ Marks an incomplete item as complete (241ms)
+    ✓ Properly displays completed items (836ms)
+    ✓ Shows remaining todos in the footer (333ms)
+    ✓ Removes a todo (301ms)
+    ✓ Marks an incomplete item as complete (314ms)
 
 
   4 passing (2s)
@@ -743,13 +831,35 @@ $ cypress run
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
   │ ✔ todo-list.spec.js                         00:01        4        4        -        -        - │
   └────────────────────────────────────────────────────────────────────────────────────────────────┘
-    All specs passed!                           00:09       16       16        -        -        -  
+    All specs passed!                           00:10       16       16        -        -        -  
 
-Done in 25.36s.
+Done in 37.03s.
 === hooks-crud-hook-fade ===
 yarn run v1.13.0
-$ yarn cypress:run
-$ cypress run
+$ start-server-and-test start http-get://localhost:3000 cypress:run
+starting server using command "npm run start"
+and when url "http-get://localhost:3000" is responding
+running tests using command "cypress:run"
+
+> hooks-crud-hook-fade@0.1.0 start /Users/mah3093/playground/2019/react/react-todo-flavors/clients/hooks-crud-hook-fade
+> react-scripts start
+
+Starting the development server...
+
+Compiled successfully!
+
+You can now view hooks-crud-hook-fade in the browser.
+
+  Local:            http://localhost:3000/
+  On Your Network:  http://172.19.72.16:3000/
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+
+
+> hooks-crud-hook-fade@0.1.0 cypress:run /Users/mah3093/playground/2019/react/react-todo-flavors/clients/hooks-crud-hook-fade
+> cypress run
+
 
 ====================================================================================================
 
@@ -768,11 +878,11 @@ $ cypress run
 
 
   App initialization
-    ✓ Loads todos on page load (682ms)
-    ✓ Displays an error on failure (317ms)
+    ✓ Loads todos on page load (1413ms)
+    ✓ Displays an error on failure (386ms)
 
 
-  2 passing (1s)
+  2 passing (2s)
 
 
   (Results)
@@ -797,13 +907,13 @@ $ cypress run
 
   Footer
     with a single todo
-      ✓ displays a singular todo in count (514ms)
+      ✓ displays a singular todo in count (1559ms)
     with multiple todos
-      ✓ displays plural todos in count (289ms)
-      ✓ Handles filter links (450ms)
+      ✓ displays plural todos in count (1182ms)
+      ✓ Handles filter links (1257ms)
 
 
-  3 passing (1s)
+  3 passing (4s)
 
 
   (Results)
@@ -816,7 +926,7 @@ $ cypress run
   │ Skipped:      0              │
   │ Screenshots:  0              │
   │ Video:        false          │
-  │ Duration:     1 second       │
+  │ Duration:     4 seconds      │
   │ Spec Ran:     footer.spec.js │
   └──────────────────────────────┘
 
@@ -828,14 +938,14 @@ $ cypress run
 
   Smoke tests
     With no todos
-      ✓ Saves new todos (1486ms)
+      ✓ Saves new todos (2367ms)
     With active todos
-      ✓ Loads existing data from the DB (495ms)
-      ✓ Deletes todos (679ms)
-      ✓ Toggles todos (1003ms)
+      ✓ Loads existing data from the DB (1339ms)
+      ✓ Deletes todos (1516ms)
+      ✓ Toggles todos (1788ms)
 
 
-  4 passing (4s)
+  4 passing (7s)
 
 
   (Results)
@@ -848,7 +958,7 @@ $ cypress run
   │ Skipped:      0                   │
   │ Screenshots:  0                   │
   │ Video:        false               │
-  │ Duration:     3 seconds           │
+  │ Duration:     7 seconds           │
   │ Spec Ran:     smoke-tests.spec.js │
   └───────────────────────────────────┘
 
@@ -859,13 +969,13 @@ $ cypress run
 
 
   Todo Form
-    ✓ focuses input on load (626ms)
-    ✓ accepts input (448ms)
+    ✓ focuses input on load (1522ms)
+    ✓ accepts input (1293ms)
     Form submission
-      ✓ Adds a new todo on submit (601ms)
+      ✓ Adds a new todo on submit (1439ms)
 
 
-  3 passing (2s)
+  3 passing (4s)
 
 
   (Results)
@@ -878,7 +988,7 @@ $ cypress run
   │ Skipped:      0                 │
   │ Screenshots:  0                 │
   │ Video:        false             │
-  │ Duration:     1 second          │
+  │ Duration:     4 seconds         │
   │ Spec Ran:     todo-form.spec.js │
   └─────────────────────────────────┘
 
@@ -889,13 +999,13 @@ $ cypress run
 
 
   List items
-    ✓ Properly displays completed items (704ms)
-    ✓ Shows remaining todos in the footer (276ms)
-    ✓ Removes a todo (265ms)
-    ✓ Marks an incomplete item as complete (249ms)
+    ✓ Properly displays completed items (3331ms)
+    ✓ Shows remaining todos in the footer (1413ms)
+    ✓ Removes a todo (1317ms)
+    ✓ Marks an incomplete item as complete (1542ms)
 
 
-  4 passing (2s)
+  4 passing (8s)
 
 
   (Results)
@@ -908,7 +1018,7 @@ $ cypress run
   │ Skipped:      0                 │
   │ Screenshots:  0                 │
   │ Video:        false             │
-  │ Duration:     1 second          │
+  │ Duration:     7 seconds         │
   │ Spec Ran:     todo-list.spec.js │
   └─────────────────────────────────┘
 
@@ -922,201 +1032,23 @@ $ cypress run
   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ ✔ app-init.spec.js                          00:01        2        2        -        -        - │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔ footer.spec.js                            00:01        3        3        -        -        - │
+  │ ✔ footer.spec.js                            00:04        3        3        -        -        - │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔ smoke-tests.spec.js                       00:03        4        4        -        -        - │
+  │ ✔ smoke-tests.spec.js                       00:07        4        4        -        -        - │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔ todo-form.spec.js                         00:01        3        3        -        -        - │
+  │ ✔ todo-form.spec.js                         00:04        3        3        -        -        - │
   ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔ todo-list.spec.js                         00:01        4        4        -        -        - │
+  │ ✔ todo-list.spec.js                         00:07        4        4        -        -        - │
   └────────────────────────────────────────────────────────────────────────────────────────────────┘
-    All specs passed!                           00:09       16       16        -        -        -  
+    All specs passed!                           00:24       16       16        -        -        -  
 
-Done in 35.71s.
-=== redux ===
+Done in 55.16s.
+=== redux, ===
 yarn run v1.13.0
-$ yarn cypress:run
-$ cypress run
-
-====================================================================================================
-
-  (Run Starting)
-
-  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ Cypress:    3.1.5                                                                              │
-  │ Browser:    Electron 59 (headless)                                                             │
-  │ Specs:      5 found (app-init.spec.js, footer.spec.js, smoke-tests.spec.js, todo-form.spec.js… │
-  └────────────────────────────────────────────────────────────────────────────────────────────────┘
-
-
-────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                                                    
-  Running: app-init.spec.js...                                                             (1 of 5) 
-
-
-  App initialization
-    ✓ Loads todos on page load (582ms)
-    ✓ Displays an error on failure (326ms)
-
-
-  2 passing (948ms)
-
-
-  (Results)
-
-  ┌────────────────────────────────┐
-  │ Tests:        2                │
-  │ Passing:      2                │
-  │ Failing:      0                │
-  │ Pending:      0                │
-  │ Skipped:      0                │
-  │ Screenshots:  0                │
-  │ Video:        false            │
-  │ Duration:     0 seconds        │
-  │ Spec Ran:     app-init.spec.js │
-  └────────────────────────────────┘
-
-
-────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                                                    
-  Running: footer.spec.js...                                                               (2 of 5) 
-
-
-  Footer
-    with a single todo
-      ✓ displays a singular todo in count (601ms)
-    with multiple todos
-      ✓ displays plural todos in count (304ms)
-      ✓ Handles filter links (449ms)
-
-
-  3 passing (1s)
-
-
-  (Results)
-
-  ┌──────────────────────────────┐
-  │ Tests:        3              │
-  │ Passing:      3              │
-  │ Failing:      0              │
-  │ Pending:      0              │
-  │ Skipped:      0              │
-  │ Screenshots:  0              │
-  │ Video:        false          │
-  │ Duration:     1 second       │
-  │ Spec Ran:     footer.spec.js │
-  └──────────────────────────────┘
-
-
-────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                                                    
-  Running: smoke-tests.spec.js...                                                          (3 of 5) 
-
-
-  Smoke tests
-    With no todos
-      ✓ Saves new todos (1432ms)
-    With active todos
-      ✓ Loads existing data from the DB (410ms)
-      ✓ Deletes todos (665ms)
-      ✓ Toggles todos (920ms)
-
-
-  4 passing (3s)
-
-
-  (Results)
-
-  ┌───────────────────────────────────┐
-  │ Tests:        4                   │
-  │ Passing:      4                   │
-  │ Failing:      0                   │
-  │ Pending:      0                   │
-  │ Skipped:      0                   │
-  │ Screenshots:  0                   │
-  │ Video:        false               │
-  │ Duration:     3 seconds           │
-  │ Spec Ran:     smoke-tests.spec.js │
-  └───────────────────────────────────┘
-
-
-────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                                                    
-  Running: todo-form.spec.js...                                                            (4 of 5) 
-
-
-  Todo Form
-    ✓ focuses input on load (569ms)
-    ✓ accepts input (462ms)
-    Form submission
-      ✓ Adds a new todo on submit (583ms)
-
-
-  3 passing (2s)
-
-
-  (Results)
-
-  ┌─────────────────────────────────┐
-  │ Tests:        3                 │
-  │ Passing:      3                 │
-  │ Failing:      0                 │
-  │ Pending:      0                 │
-  │ Skipped:      0                 │
-  │ Screenshots:  0                 │
-  │ Video:        false             │
-  │ Duration:     1 second          │
-  │ Spec Ran:     todo-form.spec.js │
-  └─────────────────────────────────┘
-
-
-────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                                                    
-  Running: todo-list.spec.js...                                                            (5 of 5) 
-
-
-  List items
-    ✓ Properly displays completed items (681ms)
-    ✓ Shows remaining todos in the footer (285ms)
-    ✓ Removes a todo (258ms)
-    ✓ Marks an incomplete item as complete (266ms)
-
-
-  4 passing (2s)
-
-
-  (Results)
-
-  ┌─────────────────────────────────┐
-  │ Tests:        4                 │
-  │ Passing:      4                 │
-  │ Failing:      0                 │
-  │ Pending:      0                 │
-  │ Skipped:      0                 │
-  │ Screenshots:  0                 │
-  │ Video:        false             │
-  │ Duration:     1 second          │
-  │ Spec Ran:     todo-list.spec.js │
-  └─────────────────────────────────┘
-
-
-====================================================================================================
-
-  (Run Finished)
-
-
-      Spec                                                Tests  Passing  Failing  Pending  Skipped 
-  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ ✔ app-init.spec.js                          943ms        2        2        -        -        - │
-  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔ footer.spec.js                            00:01        3        3        -        -        - │
-  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔ smoke-tests.spec.js                       00:03        4        4        -        -        - │
-  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔ todo-form.spec.js                         00:01        3        3        -        -        - │
-  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ ✔ todo-list.spec.js                         00:01        4        4        -        -        - │
-  └────────────────────────────────────────────────────────────────────────────────────────────────┘
-    All specs passed!                           00:09       16       16        -        -        -  
-
-Done in 29.89s.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+=== mobx, ===
+yarn run v1.13.0
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+=== mobx-decorators ===
+yarn run v1.13.0
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
