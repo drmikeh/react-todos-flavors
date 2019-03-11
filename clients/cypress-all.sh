@@ -6,16 +6,17 @@ declare -a clients=(
     "hooks"
     "hooks-crud-hook"
     "hooks-crud-hook-fade"
-    "redux",
-    "mobx",
+    "redux"
+    "mobx"
     "mobx-decorators"
 )
 
 for client in "${clients[@]}"
 do
-  echo "=== ${client} ==="
+  echo "=== Starting Cypress Tests for ${client} ==="
   cd "${client}"
   yarn cypress:cicd
+  echo "=== Completed Cypress Tests for ${client} ==="
   cd ..
 done
 

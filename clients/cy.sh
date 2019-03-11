@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./cypress-all.sh > cypress-all.log
+time ./cypress-all.sh > cypress-all.log
