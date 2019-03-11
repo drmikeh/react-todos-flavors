@@ -2,3 +2,6 @@
 node_modules
 clients/common/cypress/videos
 cypress-all.log
+mochawesome-report
+mochawesome.json
+**/cypress/results

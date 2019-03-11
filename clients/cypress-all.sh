@@ -17,6 +17,6 @@ do
   cd "${client}"
   yarn cypress:cicd
   echo "=== Completed Cypress Tests for ${client} ==="
+  open mochawesome-report/mochawesome.html
   cd ..
 done
-
