@@ -64,15 +64,21 @@ class Todo extends React.Component {
             })}>
                 <div className="view">
                     <input
+                        data-testid={`toggle-button-${todo.id}`}
                         className="toggle"
                         type="checkbox"
                         checked={todo.completed}
                         onChange={() => {toggle(todo.id)}}
                     />
                     <label onDoubleClick={this.onEdit}>{editTitle}</label>
-                    <button className="destroy" onClick={() => {remove(todo.id)}} />
+                    <button
+                        data-testid={`delete-button-${todo.id}`}
+                        className="destroy"
+                        onClick={() => {remove(todo.id)}}
+                    />
                 </div>
                 <input
+                    data-testid={`title-input-${todo.id}`}
                     ref={this.editInputRef}
                     type="text"
                     className="edit"

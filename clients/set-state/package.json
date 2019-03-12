@@ -21,10 +21,12 @@
     "cypress": "^3.1.5",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
+    "jest-dom": "^3.1.2",
     "mocha": "^5.2.0",
     "mochawesome": "^3.1.1",
     "mochawesome-merge": "^1.0.7",
     "mochawesome-report-generator": "^3.1.5",
+    "react-testing-library": "^6.0.0",
     "start-server-and-test": "^1.7.11"
   },
   "scripts": {
@@ -32,8 +34,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "ci-test-helper": "CI=true react-scripts test",
-    "ci-test": "concurrently --success first -k \"NODE_ENV=test PORT=3002 node ../../servers/rest/bin/www\" \"yarn ci-test-helper\"",
+    "ci-test": "CI=true react-scripts test",
     "cypress": "cypress open",
     "cypress:run": "cypress run",
     "cypress:cicd-helper": "start-server-and-test start http-get://localhost:3000 cypress:run",

@@ -1,109 +1,180 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import { expect } from 'chai';
-import App from './App';
-import TodoApp from '../todos/TodoApp';
-import Todo from '../todos/Todo';
-import TodoService from '../../services/TodoService';
+import React from 'react'
+import { Simulate } from 'react-dom/test-utils'
+import { cleanup, render, waitForElement } from 'react-testing-library'
+import mockAxios from 'axios'
+import App from './App'
 
-async function mountApp() {
-    if (wrapper) {
-        wrapper.unmount();
+const scheduler = typeof setImmedate === 'function' ? setImmediate : setTimeout
+function flushPromises(millis = 0) {
+    if (millis > 0) {
+        return new Promise(res => setTimeout(res, millis) )
     }
-    wrapper = mount(<App />);
-    const promise = await asyncFlush();
-    wrapper.update(); // waits for TodoApp's componentDidMount to call setState
-    return promise;
+    else {
+        return new Promise(res => scheduler(res))
+    }
 }
 
-const asyncFlush = (delay = 100) => new Promise(resolve => setTimeout(resolve, delay));
+const mockData = [
+    {
+        id: 1,
+        title: "Learn React",
+        completed: true
+      },
+      {
+        id: 2,
+        title: "Learn Redux",
+        completed: true
+      },
+      {
+        id: 3,
+        title: "Learn GraphQL",
+        completed: false
+      }
+]
 
-let wrapper = null;
+beforeAll(() => {
+    mockAxios.get.mockImplementation(() => Promise.resolve({ data: mockData }))
+    mockAxios.put.mockImplementation((url, data) => {
+        console.log('PUT:', url, data)
+        return Promise.resolve({ data })
+    })
+    mockAxios.post.mockImplementation((url, data) => {
+        console.log('POST:', url, data)
+        return Promise.resolve({ data: { id: 100, ...data } })
+    })
+})
 
-beforeEach(async () => {
-    await TodoService.reset(); // reset the server's list of todos
-    await mountApp();
-});
+beforeEach(() => {
+})
 
-function verifyTodo(wrapper, expectedTitle, expectedCompleted) {
-    expect(wrapper.text()).to.equal(expectedTitle);
-    expect(wrapper.prop('todo').title).to.equal(expectedTitle);
-    expect(wrapper.prop('todo').completed).to.equal(expectedCompleted);
-    expect(wrapper.childAt(0).hasClass('completed')).to.equal(expectedCompleted);
+afterEach(() => {
+    cleanup()
+})
+
+function verifyTodo(label, expectedTitle, expectedCompleted) {
+    expect(label).toBeTruthy()
+    expect(label.innerHTML).toEqual(expectedTitle)
+    const checkbox = label.parentNode.querySelector('input[type="checkbox"]')
+    expect(checkbox).toHaveProperty('checked', expectedCompleted)
 }
 
 describe('React Todos App with Set State', () => {
-    it('renders without crashing', () => {
-        // nothing to do here as the `beforeEach` is mounting the component for us.    
-    });
-
     it('renders todos title', () => {
-      expect(wrapper.find('h1').text()).to.equal('todos');
-    });
+        const { container } = render(<App />)
+        expect(container).toBeTruthy()
+        const todosHeader = container.querySelector('header h1')
+        expect(todosHeader).toHaveTextContent('todos')
+    })
 
-    it('renders 3 todos', () => {    
-        // We need jest to wait until the axios data arrives, so we return a Promise that
-        // is resolved after the data arrives.
-        return new Promise(resolve => {
-            expect(wrapper.find(Todo).length).to.equal(3);
+    it('renders 3 todos', async () => {
+        const { getByText } = render(<App />)
+        await waitForElement(() => getByText('Learn Redux'))
+        const todoList = document.querySelector('ul')
+        expect(todoList.childElementCount).toEqual(3)
+        mockData.forEach( item => {
+            verifyTodo(getByText(item.title), item.title, item.completed)
+        })
+    })
 
-            // console.log(learnReact.debug());
-            verifyTodo(wrapper.find(Todo).at(0), 'Learn React', true);
-            verifyTodo(wrapper.find(Todo).at(1), 'Learn Redux', true);
-            verifyTodo(wrapper.find(Todo).at(2), 'Learn GraphQL', false);
+    it("can update an existing todo's title", async () => {
+        const { getByText, getByTestId } = render(<App />)
 
-            resolve('all done');
-        });
-    });
+        // wait for data to load
+        const learnReduxLabel = await waitForElement(() => getByText('Learn Redux'))
+        expect(learnReduxLabel).toBeTruthy()
+        Simulate.doubleClick(learnReduxLabel)
+        const titleInput = getByTestId(`title-input-${2}`)
+        expect(titleInput).toBeTruthy()
+        
+        const newTitle = 'Learn Go'
+        titleInput.value = newTitle
+        Simulate.change(titleInput)
+        // Simulate.keyDown(titleInput, { keyCode: 13 })  // Enter key
+        // fireEvent.blur(titleInput)
 
-    it("can update an existing todo's title", () => {
-        // We need jest to wait until the axios data arrives, so we return a Promise that
-        // is resolved after the data arrives.
-        return new Promise(async (resolve, reject) => {
-            expect(wrapper.find(Todo).length).to.equal(3);
-            const todoApp = wrapper.find(TodoApp);
-            todoApp.instance().onUpdateTitle(2, 'Learn Go')
-            .then(async () => {
-                mountApp();   // we must remount the component because Enzyme wrappers are immutable.
-                await asyncFlush();
-                wrapper.update();
-                verifyTodo(wrapper.find(Todo).at(1), 'Learn Go', true);
-                resolve('all done');
-            });
-        });
-    });
+        // test that the editing worked
+        verifyTodo(getByText(newTitle), newTitle, true)
 
-    it("can toggle an existing todo's completed status", () => {
-        // We need jest to wait until the axios data arrives, so we return a Promise that
-        // is resolved after the data arrives.
-        return new Promise(async (resolve, reject) => {
-            expect(wrapper.find(Todo).length).to.equal(3);
-            const todoApp = wrapper.find(TodoApp);
-            todoApp.instance().onToggleCompleted(2)
-                .then(async () => {
-                    mountApp(); // we must remount the component because Enzyme wrappers are immutable.
-                    await asyncFlush();
-                    wrapper.update();
-                    verifyTodo(wrapper.find(Todo).at(1), 'Learn Redux', false);
-                    resolve('all done');
-                });
-        });
-    });
-            
-    it('can create a new todo', () => {
-        // We need jest to wait until the axios data arrives, so we return a Promise that
-        // is resolved after the data arrives.
-        return new Promise(async (resolve, reject) => {
-            expect(wrapper.find(Todo).length).to.equal(3);
-            const todoApp = wrapper.find(TodoApp);
-            todoApp.instance().onAdd('Groceries')
-            .then(() => {
-                // mountApp();   // here remounting causes this test to fail, I don't know why!
-                wrapper.update();
-                expect(wrapper.find(Todo).length).to.equal(4);
-                verifyTodo(wrapper.find(Todo).at(3), 'Groceries', false);
-                resolve('all done');
-            });
-        });
-    });
-});
+        // test that we have our saved todo from the server
+        const learnGo = await waitForElement(() => getByText(newTitle))
+        verifyTodo(learnGo, newTitle, true)
+    })
+
+    it("can toggle an existing todo's completed status", async () => {
+        const { getByText, getByTestId } = render(<App />)
+
+        // wait for data to load
+        const learnReduxLabel = await waitForElement(() => getByText('Learn Redux'))
+        expect(learnReduxLabel).toBeTruthy()
+        verifyTodo(learnReduxLabel, 'Learn Redux', true)
+        const checkBox = getByTestId(`toggle-button-${2}`)
+        expect(checkBox).toBeTruthy()
+        expect(checkBox.checked).toBeTruthy()
+
+        // Simulate.click(checkBox)  // click is not working!
+
+        // either of the following will work
+        // fireEvent.click(checkBox)
+        Simulate.change(checkBox, { target: { checked: false } })
+        
+        await flushPromises()
+        expect(checkBox.checked).toBeFalsy()
+
+        // test that we have our saved todo from the server
+        const learnRedux = await waitForElement(() => getByText('Learn Redux'))
+        verifyTodo(learnRedux, 'Learn Redux', false)
+    })
+
+    it('can create a new todo', async () => {
+        const { getByText, getByTestId, getByPlaceholderText } = render(<App />)
+
+        // wait for data to load
+        await waitForElement(() => getByText('Learn React'))
+        const todoList = document.querySelector('ul')
+        expect(todoList.childElementCount).toEqual(3)
+
+        const newTodoForm = getByTestId('new-todo-form')
+        expect(newTodoForm).toBeTruthy()
+        
+        // const newTodoFormInput = newTodoForm.querySelector('input')
+        const newTodoFormInput = getByPlaceholderText('What needs to be done?')
+        expect(newTodoFormInput).toBeTruthy()
+
+        const newTodoTitle = 'Learn React Testing Library'
+
+        // Simulate.change(newTodoFormInput, { target: { value: newTodoTitle } })
+        newTodoFormInput.value = newTodoTitle
+        Simulate.change(newTodoFormInput)
+        expect(newTodoFormInput.value).toBe(newTodoTitle)
+
+        // fireEvent.keyDown(newTodoFormInput, {
+        //     key: 'Enter',
+        //     keyCode: 13,
+        //     which: 13
+        // })
+        // newTodoForm.submit()
+        Simulate.submit(newTodoForm)
+
+        await waitForElement(() => getByText(newTodoTitle))
+        expect(todoList.childElementCount).toEqual(4)
+        expect(newTodoFormInput.value).toBe('')
+    })
+
+    it('can delete a todo', async () => {
+        const { getByText, getByTestId } = render(<App />)
+        
+        // wait for data to load
+        const learnReduxLabel = await waitForElement(() => getByText('Learn Redux'))
+        expect(learnReduxLabel).toBeTruthy()
+        verifyTodo(learnReduxLabel, 'Learn Redux', true)
+
+        const deleteButton = getByTestId(`delete-button-${2}`)
+        expect(deleteButton).toBeTruthy()
+
+        // Simulate.change(checkBox, { target: { checked: false } })
+        Simulate.click(deleteButton)
+        await flushPromises()
+        const todoList = document.querySelector('ul')
+        expect(todoList.childElementCount).toEqual(2)
+    })
+})
