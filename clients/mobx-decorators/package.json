@@ -49,10 +49,10 @@
     "postcss-loader": "3.0.0",
     "postcss-preset-env": "6.0.6",
     "postcss-safe-parser": "4.0.1",
-    "react": "^16.6.3",
+    "react": "^16.8.4",
     "react-app-polyfill": "^0.1.3",
     "react-dev-utils": "^6.1.1",
-    "react-dom": "^16.6.3",
+    "react-dom": "^16.8.4",
     "react-router-dom": "^4.3.1",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
@@ -67,12 +67,24 @@
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.3"
   },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "cypress": "^3.1.5",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "jest-dom": "^3.1.2",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.1.1",
+    "mochawesome-merge": "^1.0.7",
+    "mochawesome-report-generator": "^3.1.5",
+    "react-testing-library": "^6.0.0",
+    "start-server-and-test": "^1.7.11"
+  },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "ci-test-helper": "CI=true react-scripts test",
-    "ci-test": "concurrently --success first -k \"NODE_ENV=test PORT=3002 node ../../servers/rest/bin/www\" \"yarn ci-test-helper\"",
+    "ci-test": "CI=true react-scripts test",
     "cypress": "cypress open",
     "cypress:run": "cypress run",
     "cypress:cicd-helper": "start-server-and-test start http-get://localhost:3000 cypress:run",
@@ -149,15 +161,5 @@
     "presets": [
       "react-app"
     ]
-  },
-  "devDependencies": {
-    "cypress": "^3.1.5",
-    "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.9.1",
-    "mocha": "^5.2.0",
-    "mochawesome": "^3.1.1",
-    "mochawesome-merge": "^1.0.7",
-    "mochawesome-report-generator": "^3.1.5",
-    "start-server-and-test": "^1.7.11"
   }
 }

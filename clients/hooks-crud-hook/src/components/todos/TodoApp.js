@@ -38,7 +38,7 @@ const TodoApp = () => {
         todos.destroyMany(todo => todo.completed);
     }
     
-    function getTodosToShow(viewState) {
+    function filterTodos(viewState) {
         return todos.filter(todo => {
             switch (viewState) {
                 case ALL_TODOS:
@@ -75,7 +75,7 @@ const TodoApp = () => {
                 <main className="main">
                     <Route path="/:filter?" render={props => {
                         const filter = props.match.params.filter || ALL_TODOS;
-                        const todosToShow = getTodosToShow(filter);
+                        const todosToShow = filterTodos(filter);
                         return (todos.loading ? <h3>Loading...</h3> :
                             <TodoList
                                 {...props}

@@ -17,10 +17,13 @@ const TodoApp = () => {
     console.log('TodoApp');
     
     // initial load of todos data
-    useEffect(async () => {
+    useEffect(() => {
         try {
-            const response = await TodoService.get();
-            setTodos(response.data);
+            TodoService.get().then(response => {
+                setTodos(response.data)
+            }).catch(err => {
+                toastr.error(err)
+            })
         } catch(error) {
             toastr.error(error);
         }
@@ -33,7 +36,7 @@ const TodoApp = () => {
      * those variables are reassigned.
      */
 
-    function getTodosToShow(viewState) {
+    function filterTodos(viewState) {
         return todos.filter(todo => {
             switch (viewState) {
                 case ALL_TODOS:
@@ -128,7 +131,7 @@ const TodoApp = () => {
                 <main className="main">
                         <Route path="/:filter?" render={props => {
                             const filter = props.match.params.filter || ALL_TODOS;
-                            const todosToShow = getTodosToShow(filter);
+                            const todosToShow = filterTodos(filter);
                         return (
                             <TodoList
                                 {...props}

@@ -1,0 +1,862 @@
+=== Starting RTL Integration Tests for set-state ===
+yarn run v1.13.0
+$ CI=true react-scripts test
+Done in 4.12s.
+=== Completed RTL Integration Tests for set-state ===
+=== Starting RTL Integration Tests for unstated ===
+yarn run v1.13.0
+$ CI=true react-scripts test
+Done in 4.07s.
+=== Completed RTL Integration Tests for unstated ===
+=== Starting RTL Integration Tests for hooks ===
+yarn run v1.13.0
+$ CI=true react-scripts test
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:72)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:81)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:91)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:115)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:115)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:140)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:140)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:175)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:175)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+Done in 3.27s.
+=== Completed RTL Integration Tests for hooks ===
+=== Starting RTL Integration Tests for hooks-crud-hook ===
+yarn run v1.13.0
+$ CI=true react-scripts test
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:72)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:72)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:81)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:81)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:91)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:91)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:115)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:115)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:115)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:140)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:140)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:140)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:175)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:175)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:175)
+
+  console.log src/components/todos/TodoApp.js:17
+    TodoApp
+
+Done in 3.79s.
+=== Completed RTL Integration Tests for hooks-crud-hook ===
+=== Starting RTL Integration Tests for hooks-crud-hook-fade ===
+yarn run v1.13.0
+$ CI=true react-scripts test
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: true
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: true
+
+  console.log src/hooks/use-crud.js:17
+    loading done
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:72)
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:72)
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:72)
+
+  console.log src/hooks/use-crud.js:17
+    loading done
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:81)
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: false
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:81)
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: false
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: true
+
+  console.log src/hooks/use-crud.js:17
+    loading done
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:91)
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: false
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:91)
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: false
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: true
+
+  console.log src/hooks/use-crud.js:17
+    loading done
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:115)
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: false
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:115)
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: false
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:115)
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: false
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: true
+
+  console.log src/hooks/use-crud.js:17
+    loading done
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:140)
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: false
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:140)
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: false
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:140)
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: false
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: true
+
+  console.log src/hooks/use-crud.js:17
+    loading done
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:175)
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: false
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:175)
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: false
+
+  console.error node_modules/react-dom/cjs/react-dom.development.js:506
+    Warning: An update to TodoApp inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://fb.me/react-wrap-tests-with-act
+        in TodoApp (at App.js:8)
+        in Router (created by BrowserRouter)
+        in BrowserRouter (at App.js:7)
+        in App (at App.test.js:175)
+
+  console.log src/components/todos/TodoApp.js:18
+    TodoApp: false
+
+Done in 27.65s.
+=== Completed RTL Integration Tests for hooks-crud-hook-fade ===
+=== Starting RTL Integration Tests for redux ===
+yarn run v1.13.0
+$ CI=true react-scripts test
+Done in 4.47s.
+=== Completed RTL Integration Tests for redux ===

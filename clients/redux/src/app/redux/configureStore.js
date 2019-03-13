@@ -4,7 +4,6 @@ import rootReducer from './root-reducer';
 import { fetchTodos } from '../../todos/redux/actions';
 
 const configureStore = () => {
-
     const middlewares = [thunk];
     if (process.env.NODE_ENV === 'development') {
         const { logger } = require('redux-logger');
@@ -14,7 +13,11 @@ const configureStore = () => {
     // create and populate the Redux store
     // const store = createStore(rootReducer, applyMiddleware(thunk, logger));
     const store = compose(applyMiddleware(...middlewares))(createStore)(rootReducer);
-    store.dispatch(fetchTodos());
+    
+    // Give some time for the axios mock to be configured by the integration test
+    setTimeout(() => {
+        store.dispatch(fetchTodos());
+    }, 50);
     return store;
 }
 

@@ -11,7 +11,7 @@ class Todo extends React.Component {
             editing: false,
             editTitle: this.props.todo.title,
         };
-        this.editInputRef = React.createRef();
+        this.editInputRef = React.createRef();  // the ref is used to grab focus
     }
 
     onEdit = () => {

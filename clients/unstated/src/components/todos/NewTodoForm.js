@@ -4,6 +4,7 @@ const NewTodoForm = ({ addTodo }) => {
     let input = null;
     return (
         <form
+            data-testid="new-todo-form"
             onSubmit={e => {
                 e.preventDefault();
                 const val = input.value.trim();

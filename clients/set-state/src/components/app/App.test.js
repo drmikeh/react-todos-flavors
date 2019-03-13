@@ -33,14 +33,23 @@ const mockData = [
 ]
 
 beforeAll(() => {
-    mockAxios.get.mockImplementation(() => Promise.resolve({ data: mockData }))
+    mockAxios.get.mockImplementation(() => {
+        // console.log('GET')
+        return Promise.resolve({ data: mockData })
+    })
     mockAxios.put.mockImplementation((url, data) => {
-        console.log('PUT:', url, data)
+        // console.log('PUT:', url, data)
         return Promise.resolve({ data })
     })
     mockAxios.post.mockImplementation((url, data) => {
-        console.log('POST:', url, data)
+        // console.log('POST:', url, data)
         return Promise.resolve({ data: { id: 100, ...data } })
+    })
+    mockAxios.delete.mockImplementation((url, data) => {
+        const id = url.slice(1)
+        const deletedTodo = mockData.find( t => t.id === Number(id))
+        // console.log('DELETE:', deletedTodo)
+        return Promise.resolve({ data: deletedTodo })
     })
 })
 
@@ -59,11 +68,13 @@ function verifyTodo(label, expectedTitle, expectedCompleted) {
 }
 
 describe('React Todos App with Set State', () => {
-    it('renders todos title', () => {
-        const { container } = render(<App />)
+    it('renders todos title', async () => {
+        const { container, getByText } = render(<App />)
         expect(container).toBeTruthy()
+        await waitForElement(() => getByText('todos'))
         const todosHeader = container.querySelector('header h1')
-        expect(todosHeader).toHaveTextContent('todos')
+        expect(todosHeader).toBeTruthy()
+        // expect(todosHeader).toHaveTextContent('todos')
     })
 
     it('renders 3 todos', async () => {

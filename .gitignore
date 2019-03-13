@@ -5,3 +5,4 @@ cypress-all.log
 mochawesome-report
 mochawesome.json
 **/cypress/results
+rtl-all.log

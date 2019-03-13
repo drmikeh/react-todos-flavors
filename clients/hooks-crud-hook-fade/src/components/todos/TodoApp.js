@@ -39,7 +39,7 @@ const TodoApp = () => {
         todos.destroyMany(todo => todo.completed);
     }
     
-    function getTodosToShow(viewState) {
+    function filterTodos(viewState) {
         return todos.filter(todo => {
             switch (viewState) {
                 case ALL_TODOS:
@@ -69,15 +69,15 @@ const TodoApp = () => {
     
     const content = todos.loading ? spinner : (
         <article className="todoapp">
-            <header className="header">
+            <div>
                 <NewTodoForm addTodo={create} />
-            </header>
+            </div>
             <main className="main">
                 <Route
                     path="/:filter?"
                     render={props => {
                         const filter = props.match.params.filter || ALL_TODOS;
-                        const todosToShow = getTodosToShow(filter);
+                        const todosToShow = filterTodos(filter);
                         return (
                             <TodoList
                                 key={2}
@@ -101,7 +101,9 @@ const TodoApp = () => {
 
     return (
         <section>
-            <h1 className="title">todos</h1>
+            <header className="header">
+                <h1 className="title">todos</h1>
+            </header>
             <ReactCSSTransitionReplace
                 transitionName="cross-fade"
                 transitionEnterTimeout={1000}

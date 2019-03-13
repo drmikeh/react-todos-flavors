@@ -69,9 +69,7 @@ export const deleteTodoSuccess = id => ({
 export const deleteTodo = id => (
     async dispatch => {
         try {
-            console.log('deleteTodo')
             const response = await TodoService.delete(id);
-            console.log('dispatching deleteTodoSuccess:', response)
             dispatch(deleteTodoSuccess(response.data.id))
         } catch (error) {
             toastr.error(error);
