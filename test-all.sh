@@ -14,15 +14,7 @@ cd ..
 
 echo "=== CLIENTS ==="
 cd ../clients
-
-echo "=== set-state Client ==="
-cd set-state
-yarn ci-test
-cd ..
-
-echo "=== unstated Client ==="
-cd unstated
-yarn ci-test
+./rtl-all.sh
 cd ..
 
 echo "=== All Done ==="
