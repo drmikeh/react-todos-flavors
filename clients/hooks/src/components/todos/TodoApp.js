@@ -33,7 +33,7 @@ const TodoApp = () => {
      * If the list is not provided, the effect executes with every change
      * to props or state (cDM + cDU).
      * If the list contains some variables, the effect executes whenever any of
-     * those variables are reassigned.
+     * those variables are reassigned (cDM, cDU with checks).
      */
 
     function filterTodos(viewState) {
