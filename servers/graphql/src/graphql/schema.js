@@ -42,7 +42,7 @@ const schema = buildSchema(`
         "The title for the Todo"
         title: String
 
-        "True of the Todo has been completed."
+        "True if the Todo has been completed."
         completed: Boolean
     }
 

@@ -1,8 +1,4 @@
-const { getTodos, getTodo, createTodo, updateTodo, destroyTodo } = require('../models/Todos');
-
-const messageReducer = {
-    message: () => 'Hello World!',
-};
+const { getTodos, getTodo, createTodo, updateTodo, destroyTodo } = require('../../models/Todos');
 
 const todosReducer = {
     todos: getTodos,
@@ -34,12 +30,6 @@ const todosReducer = {
                 throw err.message
             });
     }
-}
-
-// Root resolver
-const rootReducer = {
-    ...messageReducer,
-    ...todosReducer
 };
 
-module.exports = rootReducer;
+module.exports = todosReducer;

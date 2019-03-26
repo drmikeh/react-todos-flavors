@@ -1,7 +1,7 @@
 const express = require('express');
 const express_graphql = require('express-graphql');
 const schema = require('./graphql/schema');
-const rootReducer = require('./graphql/root-reducer');
+const rootReducer = require('./graphql/reducers');
 
 // Create an express server and a GraphQL endpoint
 const app = express();

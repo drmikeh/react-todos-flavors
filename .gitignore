@@ -7,3 +7,4 @@ mochawesome.json
 **/cypress/results
 rtl-all.log
 test-all.log
+.DS_Store
