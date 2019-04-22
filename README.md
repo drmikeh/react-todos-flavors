@@ -12,21 +12,20 @@ I am developing the TodoMVC app using each of the following state management opt
 6. Redux
 7. Redux with redux-actions
 8. Apollo - works with GraphQL
-9. Relay - works with GraphQL
 
 So far I have completed the TodoMVC app using approaches 1, 2, and 3 above. I should be able to complete options 4 and 5 pretty quickly. Options 6 through 9 will take more work.
 
 
 ## Future Ideas
 
-* Add testing with Jest and Enzyme
+* Add testing with Jest and RTL - DONE!
 * Add a "Loading..." indicator for all flavors
 * Develop criteria for comparing flavors:
   * Separation of concerns
   * Readability
   * Testability
   * Maintainability
-* Develop a TODOs server and database for all flavors
+* Develop a TODOs server and database for all flavors - DONE!
   * RESTful API
   * GraphQL API
 
@@ -152,6 +151,4 @@ MobX adds observers to JavaScript variables so that you can trigger code to exec
 
 ## Apollo with GraphQL
 
-
-## Relay with GraphQL
 

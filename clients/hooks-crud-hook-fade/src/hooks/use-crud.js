@@ -14,7 +14,6 @@ function useCrud(service, initialValue, initialLoading) {
                 setLoading(true);
                 const response = await TodoService.get();
                 setTimeout(() => {
-                    console.log('loading done');
                     setLoading(false);
                     setItems(response.data);
                 }, 800);

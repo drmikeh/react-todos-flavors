@@ -1,0 +1,54 @@
+{
+  "name": "set-state",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:3002/",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "font-awesome": "^4.7.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.1",
+    "toastr": "^2.1.4",
+    "todomvc-app-css": "^2.1.2",
+    "todomvc-common": "^1.0.5"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "cypress": "^3.1.5",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "jest-dom": "^3.1.2",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.1.1",
+    "mochawesome-merge": "^1.0.7",
+    "mochawesome-report-generator": "^3.1.5",
+    "react-testing-library": "^6.0.0",
+    "start-server-and-test": "^1.7.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "ci-test": "CI=true react-scripts test",
+    "cypress": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:cicd-helper": "start-server-and-test start http-get://localhost:3000 cypress:run",
+    "mochawesome:clean": "rm -f cypress/results/* && rm -rf mochawesome-report && rm -f mochawesome.json",
+    "mochawesome:merge": "npx mochawesome-merge --reportDir cypress/results > mochawesome.json",
+    "mochawesome:gen-report": "npx mochawesome-report-generator -p set-state mochawesome.json",
+    "cypress:cicd": "yarn mochawesome:clean && yarn cypress:cicd-helper && yarn mochawesome:merge && yarn mochawesome:gen-report"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

@@ -19,17 +19,17 @@ const mockData = [
         id: 1,
         title: "Learn React",
         completed: true
-      },
-      {
+    },
+    {
         id: 2,
         title: "Learn Redux",
         completed: true
-      },
-      {
+    },
+    {
         id: 3,
         title: "Learn GraphQL",
         completed: false
-      }
+    }
 ]
 
 beforeAll(() => {
@@ -56,9 +56,7 @@ beforeAll(() => {
 beforeEach(() => {
 })
 
-afterEach(() => {
-    cleanup()
-})
+afterEach(cleanup)
 
 function verifyTodo(label, expectedTitle, expectedCompleted) {
     expect(label).toBeTruthy()
@@ -68,16 +66,18 @@ function verifyTodo(label, expectedTitle, expectedCompleted) {
 }
 
 describe('React Todos App with Set State', () => {
-    it('renders todos title', async () => {
+    it('renders todos title', async done => {
         const { container, getByText } = render(<App />)
         expect(container).toBeTruthy()
         await waitForElement(() => getByText('todos'))
         const todosHeader = container.querySelector('header h1')
         expect(todosHeader).toBeTruthy()
-        // expect(todosHeader).toHaveTextContent('todos')
+        expect(todosHeader).toHaveTextContent('todos')
+        await flushPromises()
+        done()
     })
 
-    it('renders 3 todos', async () => {
+    it('renders 3 todos', async done => {
         const { getByText } = render(<App />)
         await waitForElement(() => getByText('Learn Redux'))
         const todoList = document.querySelector('ul')
@@ -85,9 +85,11 @@ describe('React Todos App with Set State', () => {
         mockData.forEach( item => {
             verifyTodo(getByText(item.title), item.title, item.completed)
         })
+        await flushPromises()
+        done()
     })
 
-    it("can update an existing todo's title", async () => {
+    it("can update an existing todo's title", async done => {
         const { getByText, getByTestId } = render(<App />)
 
         // wait for data to load
@@ -109,14 +111,16 @@ describe('React Todos App with Set State', () => {
         // test that we have our saved todo from the server
         const learnGo = await waitForElement(() => getByText(newTitle))
         verifyTodo(learnGo, newTitle, true)
+
+        await flushPromises()
+        done()
     })
 
-    it("can toggle an existing todo's completed status", async () => {
+    it("can toggle an existing todo's completed status", async done => {
         const { getByText, getByTestId } = render(<App />)
 
         // wait for data to load
         const learnReduxLabel = await waitForElement(() => getByText('Learn Redux'))
-        expect(learnReduxLabel).toBeTruthy()
         verifyTodo(learnReduxLabel, 'Learn Redux', true)
         const checkBox = getByTestId(`toggle-button-${2}`)
         expect(checkBox).toBeTruthy()
@@ -134,9 +138,12 @@ describe('React Todos App with Set State', () => {
         // test that we have our saved todo from the server
         const learnRedux = await waitForElement(() => getByText('Learn Redux'))
         verifyTodo(learnRedux, 'Learn Redux', false)
+
+        await flushPromises()
+        done()
     })
 
-    it('can create a new todo', async () => {
+    it('can create a new todo', async done => {
         const { getByText, getByTestId, getByPlaceholderText } = render(<App />)
 
         // wait for data to load
@@ -169,9 +176,12 @@ describe('React Todos App with Set State', () => {
         await waitForElement(() => getByText(newTodoTitle))
         expect(todoList.childElementCount).toEqual(4)
         expect(newTodoFormInput.value).toBe('')
+
+        await flushPromises()
+        done()
     })
 
-    it('can delete a todo', async () => {
+    it('can delete a todo', async done => {
         const { getByText, getByTestId } = render(<App />)
         
         // wait for data to load
@@ -187,5 +197,8 @@ describe('React Todos App with Set State', () => {
         await flushPromises()
         const todoList = document.querySelector('ul')
         expect(todoList.childElementCount).toEqual(2)
+
+        await flushPromises()
+        done()
     })
 })

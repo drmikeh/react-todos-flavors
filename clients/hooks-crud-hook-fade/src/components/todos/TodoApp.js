@@ -15,8 +15,6 @@ import 'todomvc-app-css/index.css';
 const TodoApp = () => {
     const todos = useCrud(TodoService, [], true);
 
-    console.log('TodoApp:', todos.loading ? 'true' : 'false');
-
     function onUpdateTitle(id, title) {
         const foundTodo = todos.find(id);
         const updatedTodo = {

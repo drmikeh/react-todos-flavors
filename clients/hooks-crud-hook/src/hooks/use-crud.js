@@ -57,7 +57,6 @@ function useCrud(service, initialValue) {
                 setItems(keepers)
             })
             .catch(error => {
-                console.log('HERE');
                 toastr.error(error);
             });
 

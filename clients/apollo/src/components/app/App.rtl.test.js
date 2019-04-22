@@ -56,7 +56,9 @@ beforeAll(() => {
 beforeEach(() => {
 })
 
-afterEach(cleanup)
+afterEach(() => {
+    cleanup()
+})
 
 function verifyTodo(label, expectedTitle, expectedCompleted) {
     expect(label).toBeTruthy()
@@ -66,18 +68,16 @@ function verifyTodo(label, expectedTitle, expectedCompleted) {
 }
 
 describe('React Todos App with Set State', () => {
-    it('renders todos title', async done => {
+    it('renders todos title', async () => {
         const { container, getByText } = render(<App />)
         expect(container).toBeTruthy()
         await waitForElement(() => getByText('todos'))
         const todosHeader = container.querySelector('header h1')
         expect(todosHeader).toBeTruthy()
-        expect(todosHeader).toHaveTextContent('todos')
-        await flushPromises()
-        done()
+        // expect(todosHeader).toHaveTextContent('todos')
     })
 
-    it('renders 3 todos', async done => {
+    it('renders 3 todos', async () => {
         const { getByText } = render(<App />)
         await waitForElement(() => getByText('Learn Redux'))
         const todoList = document.querySelector('ul')
@@ -85,11 +85,9 @@ describe('React Todos App with Set State', () => {
         mockData.forEach( item => {
             verifyTodo(getByText(item.title), item.title, item.completed)
         })
-        await flushPromises()
-        done()
     })
 
-    it("can update an existing todo's title", async done => {
+    it("can update an existing todo's title", async () => {
         const { getByText, getByTestId } = render(<App />)
 
         // wait for data to load
@@ -111,12 +109,9 @@ describe('React Todos App with Set State', () => {
         // test that we have our saved todo from the server
         const learnGo = await waitForElement(() => getByText(newTitle))
         verifyTodo(learnGo, newTitle, true)
-
-        await flushPromises()
-        done()
     })
 
-    it("can toggle an existing todo's completed status", async done => {
+    it("can toggle an existing todo's completed status", async () => {
         const { getByText, getByTestId } = render(<App />)
 
         // wait for data to load
@@ -138,12 +133,9 @@ describe('React Todos App with Set State', () => {
         // test that we have our saved todo from the server
         const learnRedux = await waitForElement(() => getByText('Learn Redux'))
         verifyTodo(learnRedux, 'Learn Redux', false)
-
-        await flushPromises()
-        done()
     })
 
-    it('can create a new todo', async done => {
+    it('can create a new todo', async () => {
         const { getByText, getByTestId, getByPlaceholderText } = render(<App />)
 
         // wait for data to load
@@ -176,12 +168,9 @@ describe('React Todos App with Set State', () => {
         await waitForElement(() => getByText(newTodoTitle))
         expect(todoList.childElementCount).toEqual(4)
         expect(newTodoFormInput.value).toBe('')
-
-        await flushPromises()
-        done()
     })
 
-    it('can delete a todo', async done => {
+    it('can delete a todo', async () => {
         const { getByText, getByTestId } = render(<App />)
         
         // wait for data to load
@@ -197,8 +186,5 @@ describe('React Todos App with Set State', () => {
         await flushPromises()
         const todoList = document.querySelector('ul')
         expect(todoList.childElementCount).toEqual(2)
-
-        await flushPromises()
-        done()
     })
 })

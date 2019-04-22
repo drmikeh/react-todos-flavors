@@ -13,8 +13,6 @@ import 'todomvc-app-css/index.css';
 
 const TodoApp = () => {
     const [todos, setTodos] = useState([]);
-
-    console.log('TodoApp');
     
     // initial load of todos data
     useEffect(() => {
